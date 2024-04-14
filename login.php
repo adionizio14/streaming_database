@@ -3,18 +3,26 @@
 // Require the database connection file
 require 'includes/database-connection.php'; 
 
-print_r("Hello World!")
-
 ?>
 
-<!DOCTYPE>
+<!DOCTYPE html>
 
 <html>
 <head>
-    <title>Log In</title>
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
 <body>
-    <h1>Log In</h1>
+    <form>
+        <h2>Login</h2>
+        <label>User Name</label>
+        <input type="text" name="uname" placeholder="User Name">
 
-<html>
+        <label>User Name</label>
+        <input type="password" name="password" placeholder="Password">
+
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
