@@ -10,7 +10,7 @@ require 'includes/database-connection.php';
 <html>
 <head>
     <title>Login</title>
-    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
@@ -19,7 +19,7 @@ require 'includes/database-connection.php';
         <label>User Name</label>
         <input type="text" name="uname" placeholder="User Name">
 
-        <label>User Name</label>
+        <label>Password</label>
         <input type="password" name="password" placeholder="Password">
 
         <button type="submit">Login</button>
