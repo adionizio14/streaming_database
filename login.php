@@ -14,13 +14,13 @@ require 'includes/database-connection.php';
 </head>
 
 <body>
-    <form>
+    <form action="" method="post">              <!-- action goes to next page -->
         <h2>Login</h2>
-        <label>User Name</label>
-        <input type="text" name="uname" placeholder="User Name">
+        <label>Username</label>
+        <input type="text" name="uname" placeholder="Username"><br>
 
         <label>Password</label>
-        <input type="password" name="password" placeholder="Password">
+        <input type="password" name="password" placeholder="Password"><br>
 
         <button type="submit">Login</button>
     </form>
