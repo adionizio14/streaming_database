@@ -1,15 +1,15 @@
 <?php
 
 // Require the database connection file
-require 'includes/database-connection.php'; 
+require 'includes/database-connection.php';
+
+$error = '';
 
 function get_cust_info(PDO $pdo, string $id) {
 
-    // SQL query to retrieve toy information based on the toy ID
-    $sql = "SELECT email
-        FROM Customers
-        WHERE email= :id;";	// :id is a placeholder for value provided later 
-                                   // It's a parameterized query that helps prevent SQL injection attacks and ensures safer interaction with the database.
+    // SQL query to retrieve username and password from the database
+    $sql = "SELECT email, password 
+            FROM Customers WHERE email = :id";		// Select the email and password from the customer table where the email is equal to the value of :id
 
 
     // Execute the SQL query using the pdo function and fetch the result
@@ -17,18 +17,6 @@ function get_cust_info(PDO $pdo, string $id) {
 
     // Return the toy information (associative array)
     return $credentials;
-}
-
-// Check if the request method is POST (i.e, form submitted)
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    
-    // Retrieve the value of the 'email' field from the POST data
-    $uname = $_POST['uname'];
-
-    // Retrieve the value of the 'orderNum' field from the POST data
-    $password = $_POST['password'];
-
-    $cust_info = get_cust_info($pdo, $uname);
 }
 
 ?>
@@ -42,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 </head>
 
 <body>
-    <form>
+    <form method="POST">
         <h2>Login</h2>
 
         <label>Username</label>
@@ -53,5 +41,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <button type="submit">Login</button>
     </form>
+
+    <?php
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            
+            // Get the username and password from the form
+            $uname = $_POST['uname'];
+            $password = $_POST['password'];
+
+            // Get the customer information from the database
+            $credentials = get_cust_info($pdo, $uname);
+
+            // Check if the password is correct
+            if ($credentials && $credentials['password'] == $password) {
+
+                // Redirect to the browse page
+                header("Location: http://localhost:80/streaming_database/browse.php");
+            } else {
+                // Display an error message
+                echo "Invalid username or password";
+            }
+        }
+    ?>
+    
 </body>
+
+
 </html>
