@@ -40,6 +40,9 @@ function get_cust_info(PDO $pdo, string $id) {
         <input type="password" name="password" placeholder="Password"><br>
 
         <button type="submit">Login</button>
+
+        <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
+        
     </form>
 
     <?php
