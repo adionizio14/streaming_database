@@ -34,7 +34,14 @@
             if ($credentials && $credentials['password'] == $password) {
 
                 // Redirect to the browse page
-                header("Location: http://localhost:80/streaming_database/browse.php");
+                // get current url
+                $url = $_SERVER['HTTP_REFERER'];
+                // cut the url to get everything before the last /
+                $url = substr($url, 0, strrpos($url, '/'));
+                // add the browse.php to the url
+                $url = $url . '/browse.php';
+                
+                header("Location: $url");
                 exit();
             }
 

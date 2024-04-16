@@ -90,7 +90,13 @@ require 'includes/database-connection.php';		// Include the database connection 
 
 
                 // Redirect to the login page
-                header("Location: http://localhost:80/streaming_database/login.php");
+                $url = $_SERVER['HTTP_REFERER'];
+                // cut the url to get everything before the last /
+                $url = substr($url, 0, strrpos($url, '/'));
+                // add the browse.php to the url
+                $url = $url . '/login.php';
+
+                header("Location: $url");
             }
         }
     ?>
