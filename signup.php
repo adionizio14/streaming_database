@@ -16,6 +16,10 @@ require 'includes/database-connection.php';		// Include the database connection 
     <form method="POST">
         <h2>Sign Up</h2>
 
+        <?php if (isset($_GET['error'])) { ?>
+            <p class="error"><?php echo $_GET['error']; ?> </p>
+            <?php } ?>
+
         <label>First Name</label>
         <input type="text" name="first_name" placeholder="First Name"><br>
 
@@ -42,10 +46,6 @@ require 'includes/database-connection.php';		// Include the database connection 
         <br>
         <br>
 
-        
-        <?php if (isset($_GET['error'])) { ?>
-            <p class="error"><?php echo $_GET['error']; ?> </p>
-            <?php } ?>
         <label> Create Password</label>
         <input type="password" name="password" placeholder="Password"><br>
 
@@ -76,7 +76,25 @@ require 'includes/database-connection.php';		// Include the database connection 
             if ($password != $confirm_password) {
                 header("Location: signup.php?error=Passwords do not match");
                 exit();
+            }
+            else if (empty($first_name) || empty($last_name) || empty($date_of_birth) || empty($email) || empty($password) || empty($confirm_password)) {
+                header("Location: signup.php?error=All fields are required");
+                exit();
+            }
+            else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+                header("Location: signup.php?error=Invalid email address");
+                exit();
             } else {
+
+                // check if the email already exists in the database
+                $sql = "SELECT email FROM Customers WHERE email = :email";
+                $stmt = pdo($pdo, $sql, ['email' => $email]);
+                $user = $stmt->fetch();
+
+                if ($user) {
+                    header("Location: signup.php?error=Email is already in use, please sign in");
+                    exit();
+                }
 
                 $password = password_hash($password, PASSWORD_DEFAULT);
                 // SQL query to insert the customer information into the database
