@@ -1,12 +1,14 @@
 <?php
 
+    session_start();
+
     // Require the database connection file
     require 'includes/database-connection.php';
 
     function get_cust_info(PDO $pdo, string $id) {
 
         // SQL query to retrieve username and password from the database
-        $sql = "SELECT email, password 
+        $sql = "SELECT email, password, cust_id 
             FROM Customers WHERE email = :id";		// Select the email and password from the customer table where the email is equal to the value of :id
 
 
@@ -39,6 +41,8 @@
                 // cut the url to get everything before the last /
                 $url = substr($url, 0, strrpos($url, '/'));
                 // add the browse.php to the url
+                $cust_id = $credentials['cust_id'];
+                $_SESSION['cust_id'] = $cust_id;
                 $url = $url . '/browse.php';
                 
                 header("Location: $url");
