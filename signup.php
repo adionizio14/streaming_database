@@ -64,11 +64,15 @@ require 'includes/database-connection.php';		// Include the database connection 
             $password = $_POST['password'];
             $confirm_password = $_POST['confirm_password'];
 
+            
+
             // print_r($date_of_birth);
             // Check if the password and confirm password match
             if ($password != $confirm_password) {
                 echo "Passwords do not match";
             } else {
+
+                $password = password_hash($password, PASSWORD_DEFAULT);
                 // SQL query to insert the customer information into the database
                 $sql = "INSERT INTO Customers (first_name, last_name, email, date_of_birth, password) 
                         VALUES (:first_name, :last_name, :email, :date_of_birth, :password)";

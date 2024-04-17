@@ -31,7 +31,7 @@
             $credentials = get_cust_info($pdo, $uname);
 
             // Check if the password is correct
-            if ($credentials && $credentials['password'] == $password) {
+            if ($credentials && password_verify($password, $credentials['password'])) {
 
                 // Redirect to the browse page
                 // get current url
