@@ -41,6 +41,11 @@ require 'includes/database-connection.php';		// Include the database connection 
         </select>
         <br>
         <br>
+
+        
+        <?php if (isset($_GET['error'])) { ?>
+            <p class="error"><?php echo $_GET['error']; ?> </p>
+            <?php } ?>
         <label> Create Password</label>
         <input type="password" name="password" placeholder="Password"><br>
 
@@ -69,7 +74,8 @@ require 'includes/database-connection.php';		// Include the database connection 
             // print_r($date_of_birth);
             // Check if the password and confirm password match
             if ($password != $confirm_password) {
-                echo "Passwords do not match";
+                header("Location: signup.php?error=Passwords do not match");
+                exit();
             } else {
 
                 $password = password_hash($password, PASSWORD_DEFAULT);
