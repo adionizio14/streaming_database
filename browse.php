@@ -8,8 +8,6 @@ require 'includes/database-connection.php';
     <title>NutFlicks</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 </head>
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
