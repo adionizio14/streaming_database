@@ -66,21 +66,21 @@
 
 </head>
 
-<body>
-    <form method="POST">
-        <h2>Login</h2>
+<body id="login_body">
+    <form id="login_form" method="POST">
+        <h2 id="login_h2">Login</h2>
 
         <?php if (isset($_GET['error'])) { ?>
             <p class="error"><?php echo $_GET['error']; ?> </p>
             <?php } ?>
 
-        <label>Username</label>
-        <input type="text" name="uname" placeholder="Username"><br>
+        <label id="login_label">Username</label>
+        <input id="login_input" type="text" name="uname" placeholder="Username"><br>
 
-        <label>Password</label>
-        <input type="password" name="password" placeholder="Password"><br>
+        <label id="login_label">Password</label>
+        <input id="login_input" type="password" name="password" placeholder="Password"><br>
 
-        <button type="submit">Login</button>
+        <button id="login_button" type="submit">Login</button>
 
         <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
         

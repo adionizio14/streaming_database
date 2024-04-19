@@ -8,7 +8,7 @@ require 'includes/database-connection.php';
 <head>
     <title>Chows and Moovies</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- <link rel="stylesheet" type="text/css" href="css/style.css"> -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #344955">
@@ -47,4 +47,44 @@ require 'includes/database-connection.php';
 
             </div>
         </nav>
+
+        <main>
+            <div class="card">
+                <div class="image">
+                    <img src="https://i.kym-cdn.com/photos/images/newsfeed/001/449/979/722.jpeg">
+                </div>
+                <div class="caption">
+                    <p class="title">Title</p>
+                    <p class="release_year">Release Year</p>
+                    <p class="runtime">Runtime</p>
+                    <p class="rating">Rating</p>
+                </div>
+            </div>
+
+            <!-- only need for one of the div with the card class, just query the data from db inclusing the images once they are added... ones below can be deleted after, added them to test the placement-->
+
+            <div class="card">
+                <div class="image">
+                    <img src="https://i.pinimg.com/564x/2a/30/3f/2a303f55d2dae25538c1106524cbb46b.jpg">
+                    <!--haha kidding heres an actual link https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg -->
+                </div>
+                <div class="caption">
+                    <p class="title">Title</p>
+                    <p class="release_year">Release Year</p>
+                    <p class="runtime">Runtime</p>
+                    <p class="rating">Rating</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="image">
+                    <img src="https://i.pinimg.com/originals/23/75/ee/2375eedba6fe4f99165d22740d5013b7.png">
+                </div>
+                <div class="caption">
+                    <p class="title">Title: Silence of the Lambs</p>
+                    <p class="release_year">Release Year</p>
+                    <p class="runtime">Runtime</p>
+                    <p class="rating">Rating</p>
+                </div>
+            </div>
 </body>
