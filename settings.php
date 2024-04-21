@@ -390,6 +390,59 @@ function get_fav_genre(PDO $pdo, int $id){
     }
 ?>
 
+<?php
+    if(isset($_POST['delete'])){
+
+        //delete the favorite movie
+        $sql = "DELETE FROM fav_movie
+                WHERE cust_ID = :cust_id";
+
+        pdo($pdo, $sql, ['cust_id' => $cust_id]);
+
+        //delete the favorite show
+        $sql = "DELETE FROM fav_show
+                WHERE cust_ID = :cust_id";
+
+        pdo($pdo, $sql, ['cust_id' => $cust_id]);
+
+        //delete the favorite actor
+        $sql = "DELETE FROM fav_actor
+                WHERE cust_ID = :cust_id";
+
+        pdo($pdo, $sql, ['cust_id' => $cust_id]);
+
+        //delete the favorite genre
+        $sql = "DELETE FROM fav_genre
+                WHERE cust_ID = :cust_id";
+
+        pdo($pdo, $sql, ['cust_id' => $cust_id]);
+
+        //delete the subscription plan
+        $sql = "DELETE FROM Customer_subscription
+                WHERE cust_ID = :cust_id";
+
+        pdo($pdo, $sql, ['cust_id' => $cust_id]);
+
+        //delete the customer
+
+        $sql = "DELETE FROM Customers
+                WHERE cust_ID = :cust_id";
+        
+        pdo($pdo, $sql, ['cust_id' => $cust_id]);
+
+        header("Location: login.php");
+        exit();
+    }
+?>
+
+<?php
+    if(isset($_POST['logout'])){
+        session_unset();
+        session_destroy();
+        header("Location: login.php");
+        exit();
+    }
+?>
 
 
 <!DOCTYPE html>
@@ -558,7 +611,24 @@ function get_fav_genre(PDO $pdo, int $id){
         <input type="password" name="confirm_password" placeholder="Confirm Password"><br>
 
         <button type="submit" name="update">Update Profile</button>
+        <button type="submit" name="delete" onclick="confirmDelete()">Delete Account</button>
+        
+        <!-- button to log out -->
+        <button type="submit" name="logout">Log Out</button>
+
+        <a href="browse.php">Back to Browse</a>
+
+        <script>
+            function confirmDelete() {
+                if(confirm("Are you sure you want to delete your account?")) {
+                    document.querySelector('form').submit();
+                }
+                
+            }
+        </script>
     </form>
+
+
 </body>
 
 </html>
