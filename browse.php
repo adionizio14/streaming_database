@@ -1,6 +1,74 @@
 <?php
 session_start();
 require 'includes/database-connection.php'; 
+
+function get_mov_info(PDO $pdo, string $id) {
+
+    // SQL query to retrieve username and password from the database
+    $sql = "SELECT title, release_year, runtime, rating 
+        FROM Movies
+        where movie_ID= :id;";		// Select the email and password from the customer table where the email is equal to the value of :id
+
+    // Execute the SQL query using the pdo function and fetch the result
+    $mov_info = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
+
+    // Return the toy mov_information (associative array)
+    return $mov_info;
+
+}
+    // SQL query to retrieve all toy IDs from the database
+    $sql = "SELECT movie_ID FROM Movies";
+
+    // Execute the SQL query using PDO and fetch all the toy IDs
+    $statement = $pdo->query($sql);
+    $movie_ids = $statement->fetchAll(PDO::FETCH_COLUMN);
+
+    // Create an empty array to store toy information
+    $movs = [];
+
+    // Iterate over each toy ID
+    foreach ($movie_ids as $id) {
+        // Retrieve info about the toy with the current ID from the db using provided PDO connection
+        $Movies = get_mov_info($pdo, $id);
+        // Add the retrieved toy information to the array
+        $movs[$id] = $Movies;
+    }
+
+// Now $toys array will contain information about all the toys
+
+function get_show_info(PDO $pdo, string $id) {
+
+    // SQL query to retrieve username and password from the database
+    $sql = "SELECT title, release_year, rating 
+        FROM Shows
+        where show_ID= :id;";		// Select the email and password from the customer table where the email is equal to the value of :id
+
+    // Execute the SQL query using the pdo function and fetch the result
+    $show_info = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
+
+    // Return the toy mov_information (associative array)
+    return $show_info;
+
+}
+    // SQL query to retrieve all toy IDs from the database
+    $sql = "SELECT Show_ID FROM Shows";
+
+    // Execute the SQL query using PDO and fetch all the toy IDs
+    $statement = $pdo->query($sql);
+    $show_ids = $statement->fetchAll(PDO::FETCH_COLUMN);
+
+    // Create an empty array to store toy information
+    $shos = [];
+
+    // Iterate over each toy ID
+    foreach ($show_ids as $id) {
+        // Retrieve info about the toy with the current ID from the db using provided PDO connection
+        $Shows = get_show_info($pdo, $id);
+        // Add the retrieved toy information to the array
+        $shos[$id] = $Shows;
+    }
+
+// Now $toys array will contain information about all the toys
 ?>
 
 <!DOCTYPE html>
@@ -49,42 +117,31 @@ require 'includes/database-connection.php';
         </nav>
 
         <main>
+            <?php foreach ($movs as $movs_inf): ?>
             <div class="card">
-                <div class="image">
-                    <img src="https://i.kym-cdn.com/photos/images/newsfeed/001/449/979/722.jpeg">
-                </div>
+                <!-- <div class="image">
+                    <img src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg">
+                </div> -->
                 <div class="caption">
-                    <p class="title">Title</p>
-                    <p class="release_year">Release Year</p>
-                    <p class="runtime">Runtime</p>
-                    <p class="rating">Rating</p>
+                    <p class="title">Title: <?php echo $movs_inf['title']; ?></p>
+                    <p class="release_year">Release Year: <?php echo $movs_inf['release_year']; ?></p>
+                    <p class="runtime">Runtime: <?php echo $movs_inf['runtime']; ?></p>
+                    <p class="rating">Rating: <?php echo $movs_inf['rating']; ?></p>
                 </div>
             </div>
+            <?php endforeach; ?>
 
-            <!-- only need for one of the div with the card class, just query the data from db inclusing the images once they are added... ones below can be deleted after, added them to test the placement-->
-
+            <?php foreach ($shos as $shos_inf): ?>
             <div class="card">
-                <div class="image">
-                    <img src="https://i.pinimg.com/564x/2a/30/3f/2a303f55d2dae25538c1106524cbb46b.jpg">
-                    <!--haha kidding heres an actual link https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg -->
-                </div>
+                <!-- <div class="image">
+                    <img src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg">
+                </div> -->
                 <div class="caption">
-                    <p class="title">Title</p>
-                    <p class="release_year">Release Year</p>
-                    <p class="runtime">Runtime</p>
-                    <p class="rating">Rating</p>
+                    <p class="title">Title: <?php echo $shos_inf['title']; ?></p>
+                    <p class="release_year">Release Year: <?php echo $shos_inf['release_year']; ?></p>
+                    <p class="rating">Rating: <?php echo $shos_inf['rating']; ?></p>
                 </div>
             </div>
-
-            <div class="card">
-                <div class="image">
-                    <img src="https://i.pinimg.com/originals/23/75/ee/2375eedba6fe4f99165d22740d5013b7.png">
-                </div>
-                <div class="caption">
-                    <p class="title">Title: Silence of the Lambs</p>
-                    <p class="release_year">Release Year</p>
-                    <p class="runtime">Runtime</p>
-                    <p class="rating">Rating</p>
-                </div>
-            </div>
+            <?php endforeach; ?>
+        </main>
 </body>
