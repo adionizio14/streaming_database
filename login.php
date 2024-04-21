@@ -43,7 +43,7 @@
                 // add the browse.php to the url
                 $cust_id = $credentials['cust_id'];
                 $_SESSION['cust_id'] = $cust_id;
-                $url = $url . '/browse.php';
+                $url = $url . '/settings.php';
                 
                 header("Location: $url");
                 exit();
