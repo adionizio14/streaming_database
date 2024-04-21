@@ -6,7 +6,6 @@ session_start();
 require 'includes/database-connection.php';
 
 $cust_id = $_SESSION['cust_id'];
-// print_r(gettype($cust_id));
 
 function get_cust_info(PDO $pdo, int $id) {
     
@@ -35,13 +34,12 @@ function get_cust_sub_plan(PDO $pdo, int $id){
 
     $plan_name = pdo($pdo, $sql, ['plan_id' => $plan_id])->fetch();
 
-    print_r($plan_name);
 
     return $plan_name;
 }
 
 function get_plan_names(PDO $pdo){
-    $sql = "SELECT subscription_name
+    $sql = "SELECT subscription_name, subscription_ID
             FROM Subscriptions";
 
     $plans = pdo($pdo, $sql)->fetchAll();
@@ -349,6 +347,7 @@ function get_fav_genre(PDO $pdo, int $id){
 
         // update the favorite genre
         if($fav_genre){
+
             $sql = "SELECT genre_ID
                     FROM fav_genre
                     WHERE cust_ID = :cust_id";
@@ -377,17 +376,17 @@ function get_fav_genre(PDO $pdo, int $id){
         }
 
         // update the subscription plan
-        if($subscription_plan){
-            
-            $sql = "UPDATE Customer_subscription
-                    SET subscription_ID = :subscription_plan
-                    WHERE cust_ID = :cust_id";
+        $sql = "UPDATE Customer_subscription
+                SET subscription_ID = :subscription_plan
+                WHERE cust_ID = :cust_id";
 
-            pdo($pdo, $sql, ['subscription_plan' => $subscription_plan, 'cust_id' => $cust_id]);
-        }
+        
+        pdo($pdo, $sql, ['subscription_plan' => $subscription_plan, 'cust_id' => $cust_id]);
+        
 
         //reload the page
         header("Location: settings.php");
+        exit();
     }
 ?>
 
@@ -540,10 +539,10 @@ function get_fav_genre(PDO $pdo, int $id){
         <br>
         <select name="subscription_plan">
             <?php
-                echo "<option value = '{$plan_name['subscription_ID']}'>{$plan_name['subscription_name']}</option>";
+                echo "<option value ='{$plan_name['subscription_ID']}'>{$plan_name['subscription_name']}</option>";
                 foreach($plans as $plan){
                     if($plan['subscription_name'] != $plan_name['subscription_name']){
-                        echo "<option value = '{$plan['subscription_ID']}'>{$plan['subscription_name']}</option>";
+                        echo "<option value ='{$plan['subscription_ID']}'>{$plan['subscription_name']}</option>";
                     }
                 }
             ?>
