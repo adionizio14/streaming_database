@@ -80,7 +80,7 @@ function get_show_info(PDO $pdo, string $id) {
 </head>
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #344955">
-            <a class="navbar-brand" href="#">Chows and Moovies</a>
+            <a class="navbar-brand" href="browse.php">Chows and Moovies</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -88,16 +88,16 @@ function get_show_info(PDO $pdo, string $id) {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Movies</a>
+                        <a class="nav-link" href="movies.php">Movies</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Shows</a>
+                        <a class="nav-link" href="shows.php">Shows</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Popular</a>
+                        <a class="nav-link" href="popular.php">Popular</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Genre</a>
+                        <a class="nav-link" href="genre.php">Genre</a>
                     </li>
                     <li class="nav-item">
                         <form class="form-inline ml-3">
@@ -123,10 +123,14 @@ function get_show_info(PDO $pdo, string $id) {
                     <img src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg">
                 </div> -->
                 <div class="caption">
+                <?php if (is_array($movs_inf)): ?>
                     <p class="title">Title: <?php echo $movs_inf['title']; ?></p>
                     <p class="release_year">Release Year: <?php echo $movs_inf['release_year']; ?></p>
                     <p class="runtime">Runtime: <?php echo $movs_inf['runtime']; ?></p>
                     <p class="rating">Rating: <?php echo $movs_inf['rating']; ?></p>
+                <?php else: ?>
+                    <p class="error">Movie information not available</p>
+                <?php endif; ?>
                 </div>
             </div>
             <?php endforeach; ?>
@@ -137,9 +141,13 @@ function get_show_info(PDO $pdo, string $id) {
                     <img src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg">
                 </div> -->
                 <div class="caption">
+                <?php if (is_array($shos_inf)): ?>
                     <p class="title">Title: <?php echo $shos_inf['title']; ?></p>
                     <p class="release_year">Release Year: <?php echo $shos_inf['release_year']; ?></p>
                     <p class="rating">Rating: <?php echo $shos_inf['rating']; ?></p>
+                <?php else: ?>
+                    <p class="error">Movie information not available</p>
+                <?php endif; ?>
                 </div>
             </div>
             <?php endforeach; ?>
