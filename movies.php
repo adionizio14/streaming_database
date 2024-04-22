@@ -55,8 +55,8 @@ function get_mov_info(PDO $pdo, string $id) {
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="movies.php">Movies</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="movies.php">Movies <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="shows.php">Shows</a>

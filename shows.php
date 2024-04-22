@@ -57,8 +57,8 @@ function get_show_info(PDO $pdo, string $id) {
                     <li class="nav-item">
                         <a class="nav-link" href="movies.php">Movies</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="shows.php">Shows</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="shows.php">Shows <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="popular.php">Popular</a>
