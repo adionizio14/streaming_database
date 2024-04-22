@@ -207,241 +207,243 @@ function get_fav_genre(PDO $pdo, int $id){
 ?>
 
 <?php
-    if(isset($_POST['update'])){
+    if(isset($_POST['action'])){
+        $action = $_POST['action'];
 
-        $first_name = $_POST['first_name'];
-        $last_name = $_POST['last_name'];
-        $date_of_birth = $_POST['date_of_birth'];
-        $fav_movie = $_POST['fav_movie'];
-        $fav_show = $_POST['fav_show'];
-        $fav_actor = $_POST['fav_actor'];
-        $fav_genre = $_POST['fav_genre'];
-        $subscription_plan = $_POST['subscription_plan'];
-        $password = $_POST['password'];
-        $confirm_password = $_POST['confirm_password'];
+        if($action == 'u'){
 
-        // make sure user has first name, last name, date of birth
-        if(empty($first_name) || empty($last_name) || empty($date_of_birth)){
-            header("Location: settings.php?error=All fields are required");
-            exit();
-        }
-        // else check if password and confirm password have values
-        else if(!empty($password) && !empty($confirm_password)){
-            // check if password and confirm password match
-            if ($password != $confirm_password) {
-                header("Location: settings.php?error=Passwords do not match");
+            $first_name = $_POST['first_name'];
+            $last_name = $_POST['last_name'];
+            $date_of_birth = $_POST['date_of_birth'];
+            $fav_movie = $_POST['fav_movie'];
+            $fav_show = $_POST['fav_show'];
+            $fav_actor = $_POST['fav_actor'];
+            $fav_genre = $_POST['fav_genre'];
+            $subscription_plan = $_POST['subscription_plan'];
+            $password = $_POST['password'];
+            $confirm_password = $_POST['confirm_password'];
+    
+            // make sure user has first name, last name, date of birth
+            if(empty($first_name) || empty($last_name) || empty($date_of_birth)){
+                header("Location: settings.php?error=All fields are required");
                 exit();
             }
+            // else check if password and confirm password have values
+            else if(!empty($password) && !empty($confirm_password)){
+                // check if password and confirm password match
+                if ($password != $confirm_password) {
+                    header("Location: settings.php?error=Passwords do not match");
+                    exit();
+                }
+                else{
+                    $password = password_hash($password, PASSWORD_DEFAULT);
+                    $sql = "UPDATE Customers
+                            SET first_name = :first_name, last_name = :last_name, date_of_birth = :date_of_birth, password = :password
+                            WHERE cust_id = :cust_id";
+    
+                    pdo($pdo, $sql, ['first_name' => $first_name, 'last_name' => $last_name, 'date_of_birth' => $date_of_birth, 'password' => $password, 'cust_id' => $cust_id]);
+                }
+            }
             else{
-                $password = password_hash($password, PASSWORD_DEFAULT);
                 $sql = "UPDATE Customers
-                        SET first_name = :first_name, last_name = :last_name, date_of_birth = :date_of_birth, password = :password
+                        SET first_name = :first_name, last_name = :last_name, date_of_birth = :date_of_birth
                         WHERE cust_id = :cust_id";
-
-                pdo($pdo, $sql, ['first_name' => $first_name, 'last_name' => $last_name, 'date_of_birth' => $date_of_birth, 'password' => $password, 'cust_id' => $cust_id]);
+    
+                pdo($pdo, $sql, ['first_name' => $first_name, 'last_name' => $last_name, 'date_of_birth' => $date_of_birth, 'cust_id' => $cust_id]);
             }
-        }
-        else{
-            $sql = "UPDATE Customers
-                    SET first_name = :first_name, last_name = :last_name, date_of_birth = :date_of_birth
-                    WHERE cust_id = :cust_id";
-
-            pdo($pdo, $sql, ['first_name' => $first_name, 'last_name' => $last_name, 'date_of_birth' => $date_of_birth, 'cust_id' => $cust_id]);
-        }
-
-        
-        // update the favorite movie
-        if($fav_movie){
-
-            // check if the user has a favorite movie
-            $sql = "SELECT movie_ID
-                    FROM fav_movie
+    
+            
+            // update the favorite movie
+            if($fav_movie){
+    
+                // check if the user has a favorite movie
+                $sql = "SELECT movie_ID
+                        FROM fav_movie
+                        WHERE cust_ID = :cust_id";
+    
+                $movie_id = pdo($pdo, $sql, ['cust_id' => $cust_id])->fetch();
+    
+                // if the user does not have a favorite movie, insert the movie into the table
+    
+                if(!$movie_id){
+                    $sql = "INSERT INTO fav_movie (cust_ID, movie_ID)
+                            VALUES (:cust_id, :fav_movie)";
+    
+                    pdo($pdo, $sql, ['cust_id' => $cust_id, 'fav_movie' => $fav_movie]);
+                }
+                elseif($fav_movie == 'empty'){
+                    $sql = "DELETE FROM fav_movie
+                            WHERE cust_ID = :cust_id";
+    
+                    pdo($pdo, $sql, ['cust_id' => $cust_id]);
+                }
+    
+                // if the user has a favorite movie, update the movie
+                else{
+                    $sql = "UPDATE fav_movie
+                            SET movie_ID = :fav_movie
+                            WHERE cust_ID = :cust_id";
+    
+                    pdo($pdo, $sql, ['fav_movie' => $fav_movie, 'cust_id' => $cust_id]);
+                }
+    
+    
+            }
+    
+            // update the favorite show
+            if($fav_show){
+                $sql = "SELECT show_ID
+                        FROM fav_show
+                        WHERE cust_ID = :cust_id";
+                
+                $show_id = pdo($pdo, $sql, ['cust_id' => $cust_id])->fetch();
+    
+                if(!$show_id){
+                    $sql = "INSERT INTO fav_show (cust_ID, show_ID)
+                            VALUES (:cust_id, :fav_show)";
+    
+                    pdo($pdo, $sql, ['cust_id' => $cust_id, 'fav_show' => $fav_show]);
+                }
+                elseif($fav_show == 'empty'){
+                    $sql = "DELETE FROM fav_show
+                            WHERE cust_ID = :cust_id";
+    
+                    pdo($pdo, $sql, ['cust_id' => $cust_id]);
+                }
+                else{
+                    $sql = "UPDATE fav_show
+                            SET show_ID = :fav_show
+                            WHERE cust_ID = :cust_id";
+    
+                    pdo($pdo, $sql, ['fav_show' => $fav_show, 'cust_id' => $cust_id]);
+                }
+            }
+    
+            // update the favorite actor
+            if($fav_actor){
+                $sql = "SELECT actor_ID
+                        FROM fav_actor
+                        WHERE cust_ID = :cust_id";
+    
+                $actor_id = pdo($pdo, $sql, ['cust_id' => $cust_id])->fetch();
+    
+                if(!$actor_id){
+                    $sql = "INSERT INTO fav_actor (cust_ID, actor_ID)
+                            VALUES (:cust_id, :fav_actor)";
+    
+                    pdo($pdo, $sql, ['cust_id' => $cust_id, 'fav_actor' => $fav_actor]);
+                }
+                elseif($fav_actor == 'empty'){
+                    $sql = "DELETE FROM fav_actor
+                            WHERE cust_ID = :cust_id";
+    
+                    pdo($pdo, $sql, ['cust_id' => $cust_id]);
+                }
+                else{
+                    $sql = "UPDATE fav_actor
+                            SET actor_ID = :fav_actor
+                            WHERE cust_ID = :cust_id";
+    
+                    pdo($pdo, $sql, ['fav_actor' => $fav_actor, 'cust_id' => $cust_id]);
+                }
+            }
+    
+            // update the favorite genre
+            if($fav_genre){
+    
+                $sql = "SELECT genre_ID
+                        FROM fav_genre
+                        WHERE cust_ID = :cust_id";
+                
+                $genre_id = pdo($pdo, $sql, ['cust_id' => $cust_id])->fetch();
+    
+                if(!$genre_id){
+                    $sql = "INSERT INTO fav_genre (cust_ID, genre_ID)
+                            VALUES (:cust_id, :fav_genre)";
+    
+                    pdo($pdo, $sql, ['cust_id' => $cust_id, 'fav_genre' => $fav_genre]);
+                }
+                elseif($fav_genre == 'empty'){
+                    $sql = "DELETE FROM fav_genre
+                            WHERE cust_ID = :cust_id";
+    
+                    pdo($pdo, $sql, ['cust_id' => $cust_id]);
+                }
+                else{
+                    $sql = "UPDATE fav_genre
+                            SET genre_ID = :fav_genre
+                            WHERE cust_ID = :cust_id";
+    
+                    pdo($pdo, $sql, ['fav_genre' => $fav_genre, 'cust_id' => $cust_id]);
+                }
+            }
+    
+            // update the subscription plan
+            $sql = "UPDATE Customer_subscription
+                    SET subscription_ID = :subscription_plan
                     WHERE cust_ID = :cust_id";
-
-            $movie_id = pdo($pdo, $sql, ['cust_id' => $cust_id])->fetch();
-
-            // if the user does not have a favorite movie, insert the movie into the table
-
-            if(!$movie_id){
-                $sql = "INSERT INTO fav_movie (cust_ID, movie_ID)
-                        VALUES (:cust_id, :fav_movie)";
-
-                pdo($pdo, $sql, ['cust_id' => $cust_id, 'fav_movie' => $fav_movie]);
-            }
-            elseif($fav_movie == 'empty'){
-                $sql = "DELETE FROM fav_movie
-                        WHERE cust_ID = :cust_id";
-
-                pdo($pdo, $sql, ['cust_id' => $cust_id]);
-            }
-
-            // if the user has a favorite movie, update the movie
-            else{
-                $sql = "UPDATE fav_movie
-                        SET movie_ID = :fav_movie
-                        WHERE cust_ID = :cust_id";
-
-                pdo($pdo, $sql, ['fav_movie' => $fav_movie, 'cust_id' => $cust_id]);
-            }
-
-
+    
+            
+            pdo($pdo, $sql, ['subscription_plan' => $subscription_plan, 'cust_id' => $cust_id]);
+            
+    
+            //reload the page
+            header("Location: settings.php");
+            exit();
         }
 
-        // update the favorite show
-        if($fav_show){
-            $sql = "SELECT show_ID
-                    FROM fav_show
+        if($action == 'd'){
+
+            //delete the favorite movie
+            $sql = "DELETE FROM fav_movie
+                    WHERE cust_ID = :cust_id";
+    
+            pdo($pdo, $sql, ['cust_id' => $cust_id]);
+    
+            //delete the favorite show
+            $sql = "DELETE FROM fav_show
+                    WHERE cust_ID = :cust_id";
+    
+            pdo($pdo, $sql, ['cust_id' => $cust_id]);
+    
+            //delete the favorite actor
+            $sql = "DELETE FROM fav_actor
+                    WHERE cust_ID = :cust_id";
+    
+            pdo($pdo, $sql, ['cust_id' => $cust_id]);
+    
+            //delete the favorite genre
+            $sql = "DELETE FROM fav_genre
+                    WHERE cust_ID = :cust_id";
+    
+            pdo($pdo, $sql, ['cust_id' => $cust_id]);
+    
+            //delete the subscription plan
+            $sql = "DELETE FROM Customer_subscription
+                    WHERE cust_ID = :cust_id";
+    
+            pdo($pdo, $sql, ['cust_id' => $cust_id]);
+    
+            //delete the customer
+    
+            $sql = "DELETE FROM Customers
                     WHERE cust_ID = :cust_id";
             
-            $show_id = pdo($pdo, $sql, ['cust_id' => $cust_id])->fetch();
-
-            if(!$show_id){
-                $sql = "INSERT INTO fav_show (cust_ID, show_ID)
-                        VALUES (:cust_id, :fav_show)";
-
-                pdo($pdo, $sql, ['cust_id' => $cust_id, 'fav_show' => $fav_show]);
-            }
-            elseif($fav_show == 'empty'){
-                $sql = "DELETE FROM fav_show
-                        WHERE cust_ID = :cust_id";
-
-                pdo($pdo, $sql, ['cust_id' => $cust_id]);
-            }
-            else{
-                $sql = "UPDATE fav_show
-                        SET show_ID = :fav_show
-                        WHERE cust_ID = :cust_id";
-
-                pdo($pdo, $sql, ['fav_show' => $fav_show, 'cust_id' => $cust_id]);
-            }
+            pdo($pdo, $sql, ['cust_id' => $cust_id]);
+    
+            header("Location: login.php");
+            exit();
         }
 
-        // update the favorite actor
-        if($fav_actor){
-            $sql = "SELECT actor_ID
-                    FROM fav_actor
-                    WHERE cust_ID = :cust_id";
-
-            $actor_id = pdo($pdo, $sql, ['cust_id' => $cust_id])->fetch();
-
-            if(!$actor_id){
-                $sql = "INSERT INTO fav_actor (cust_ID, actor_ID)
-                        VALUES (:cust_id, :fav_actor)";
-
-                pdo($pdo, $sql, ['cust_id' => $cust_id, 'fav_actor' => $fav_actor]);
-            }
-            elseif($fav_actor == 'empty'){
-                $sql = "DELETE FROM fav_actor
-                        WHERE cust_ID = :cust_id";
-
-                pdo($pdo, $sql, ['cust_id' => $cust_id]);
-            }
-            else{
-                $sql = "UPDATE fav_actor
-                        SET actor_ID = :fav_actor
-                        WHERE cust_ID = :cust_id";
-
-                pdo($pdo, $sql, ['fav_actor' => $fav_actor, 'cust_id' => $cust_id]);
-            }
+        if($action == 'l'){
+            session_unset();
+            session_destroy();
+            header("Location: login.php");
+            exit();
         }
 
-        // update the favorite genre
-        if($fav_genre){
-
-            $sql = "SELECT genre_ID
-                    FROM fav_genre
-                    WHERE cust_ID = :cust_id";
-            
-            $genre_id = pdo($pdo, $sql, ['cust_id' => $cust_id])->fetch();
-
-            if(!$genre_id){
-                $sql = "INSERT INTO fav_genre (cust_ID, genre_ID)
-                        VALUES (:cust_id, :fav_genre)";
-
-                pdo($pdo, $sql, ['cust_id' => $cust_id, 'fav_genre' => $fav_genre]);
-            }
-            elseif($fav_genre == 'empty'){
-                $sql = "DELETE FROM fav_genre
-                        WHERE cust_ID = :cust_id";
-
-                pdo($pdo, $sql, ['cust_id' => $cust_id]);
-            }
-            else{
-                $sql = "UPDATE fav_genre
-                        SET genre_ID = :fav_genre
-                        WHERE cust_ID = :cust_id";
-
-                pdo($pdo, $sql, ['fav_genre' => $fav_genre, 'cust_id' => $cust_id]);
-            }
-        }
-
-        // update the subscription plan
-        $sql = "UPDATE Customer_subscription
-                SET subscription_ID = :subscription_plan
-                WHERE cust_ID = :cust_id";
-
-        
-        pdo($pdo, $sql, ['subscription_plan' => $subscription_plan, 'cust_id' => $cust_id]);
-        
-
-        //reload the page
-        header("Location: settings.php");
-        exit();
     }
-?>
-
-<?php
-    if(isset($_POST['delete'])){
-
-        //delete the favorite movie
-        $sql = "DELETE FROM fav_movie
-                WHERE cust_ID = :cust_id";
-
-        pdo($pdo, $sql, ['cust_id' => $cust_id]);
-
-        //delete the favorite show
-        $sql = "DELETE FROM fav_show
-                WHERE cust_ID = :cust_id";
-
-        pdo($pdo, $sql, ['cust_id' => $cust_id]);
-
-        //delete the favorite actor
-        $sql = "DELETE FROM fav_actor
-                WHERE cust_ID = :cust_id";
-
-        pdo($pdo, $sql, ['cust_id' => $cust_id]);
-
-        //delete the favorite genre
-        $sql = "DELETE FROM fav_genre
-                WHERE cust_ID = :cust_id";
-
-        pdo($pdo, $sql, ['cust_id' => $cust_id]);
-
-        //delete the subscription plan
-        $sql = "DELETE FROM Customer_subscription
-                WHERE cust_ID = :cust_id";
-
-        pdo($pdo, $sql, ['cust_id' => $cust_id]);
-
-        //delete the customer
-
-        $sql = "DELETE FROM Customers
-                WHERE cust_ID = :cust_id";
-        
-        pdo($pdo, $sql, ['cust_id' => $cust_id]);
-
-        header("Location: login.php");
-        exit();
-    }
-?>
-
-<?php
-    if(isset($_POST['logout'])){
-        session_unset();
-        session_destroy();
-        header("Location: login.php");
-        exit();
-    }
+    
 ?>
 
 
@@ -457,7 +459,7 @@ function get_fav_genre(PDO $pdo, int $id){
     </head>
 
     <body>
-    <form method="POST">
+    <form id="form" method="POST">
         <h2>Account Settings</h2>
 
         <?php if (isset($_GET['error'])) { ?>
@@ -609,19 +611,35 @@ function get_fav_genre(PDO $pdo, int $id){
 
         <label>Confirm Password</label>
         <input type="password" name="confirm_password" placeholder="Confirm Password"><br>
-
-        <button type="submit" name="update">Update Profile</button>
-        <button type="submit" name="delete" onclick="confirmDelete()">Delete Account</button>
+        
+        <input type="hidden" id="action" name="action" value="">
+        
+        <button type="button" name="update" onclick="confirm_action('u')">Update Profile</button>
+        <button type="button" name="delete" onclick="confirm_action('d')">Delete Account</button>
         
         <!-- button to log out -->
-        <button type="submit" name="logout">Log Out</button>
+        <button type="button" name="logout" onclick="confirm_action('l')">Log Out</button>
 
         <a href="browse.php">Back to Browse</a>
 
         <script>
-            function confirmDelete() {
-                if(confirm("Are you sure you want to delete your account?")) {
-                    document.querySelector('form').submit();
+            function confirm_action(action) {
+                var confirmed = false;
+                if (action == 'u') {
+                    confirmed = confirm("Are you sure you want to update your profile?");
+                }
+                
+                else if (action == 'd') {
+                    confirmed = confirm("Are you sure you want to delete your account?");
+                }
+                
+                else if (action == 'l') {
+                    confirmed = confirm("Are you sure you want to log out?");
+                }
+                
+                if(confirmed){
+                    document.getElementById("action").value = action;
+                    document.getElementById("form").submit();
                 }
                 
             }
