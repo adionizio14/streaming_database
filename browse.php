@@ -1,7 +1,7 @@
 <?php
 session_start();
 require 'includes/database-connection.php'; 
-print_r($_SESSION['cust_id']);
+//print_r($_SESSION['cust_id']);
 
 function get_mov_info(PDO $pdo, string $id) {
 
