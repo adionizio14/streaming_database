@@ -24,11 +24,6 @@ h2 {
     margin-bottom: 40px;
 }
 
-div.container {
-    background-color: #2ecc71;
-    width: 200px;
-    height: 200px;
-}
 input {
     display: block;
     border: 2px solid #ccc;
