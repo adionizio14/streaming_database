@@ -615,10 +615,10 @@ function get_fav_genre(PDO $pdo, int $id){
         <input type="hidden" id="action" name="action" value="">
         
         <button type="button" name="update" onclick="confirm_action('u')">Update Profile</button>
-        <button type="button" name="delete" onclick="confirm_action('d')">Delete Account</button>
-        
-        <!-- button to log out -->
+
         <button type="button" name="logout" onclick="confirm_action('l')">Log Out</button>
+
+        <button type="button" name="delete" onclick="confirm_action('d')" style="background: red">Delete Account</button>
 
         <a href="browse.php">Back to Browse</a>
 
