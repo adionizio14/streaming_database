@@ -12,30 +12,30 @@ require 'includes/database-connection.php';		// Include the database connection 
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
-<body>
-    <form method="POST">
-        <h2>Sign Up</h2>
+<body id="login_body">
+    <form id="login_form" method="POST">
+        <h2 id="login_h2">Sign Up</h2>
 
         <?php if (isset($_GET['error'])) { ?>
             <p class="error"><?php echo $_GET['error']; ?> </p>
             <?php } ?>
 
-        <label>First Name</label>
-        <input type="text" name="first_name" placeholder="First Name"><br>
+        <label id="login_label">First Name</label>
+        <input id="login_input" type="text" name="first_name" placeholder="First Name"><br>
 
-        <label>Last Name</label>
-        <input type="text" name="last_name" placeholder="Last Name"><br>
+        <label id="login_label">Last Name</label>
+        <input id="login_input" type="text" name="last_name" placeholder="Last Name"><br>
 
         <!-- add date of birth here -->
 
-        <label> Date of Birth</label>
-        <input type="date" name="date_of_birth" placeholder="Date of Birth"><br>
+        <label id="login_label"> Date of Birth</label>
+        <input id="login_input" type="date" name="date_of_birth" placeholder="Date of Birth"><br>
 
-        <label>Email</label>
-        <input type="text" name="email" placeholder="Email"><br>
+        <label id="login_label">Email</label>
+        <input id="login_input" type="text" name="email" placeholder="Email"><br>
 
         
-        <Label> Supscription Plan</label>
+        <Label id="login_label"> Supscription Plan</label>
         <br>
         <select name="subscription_plan">
             <option value="1">Basic: $5/month (Ads) </option>
@@ -46,12 +46,12 @@ require 'includes/database-connection.php';		// Include the database connection 
         <br>
         <br>
 
-        <label> Create Password</label>
-        <input type="password" name="password" placeholder="Password"><br>
+        <label label id="login_label"> Create Password</label>
+        <input id="login_input" type="password" name="password" placeholder="Password"><br>
 
 
-        <label>Confirm Password</label>
-        <input type="password" name="confirm_password" placeholder="Confirm Password"><br>
+        <label label id="login_label">Confirm Password</label>
+        <input id="login_input" type="password" name="confirm_password" placeholder="Confirm Password"><br>
 
         <button type="submit">Sign Up</button>
     </form>
