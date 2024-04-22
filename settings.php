@@ -458,27 +458,27 @@ function get_fav_genre(PDO $pdo, int $id){
 
     </head>
 
-    <body>
-    <form id="form" method="POST">
-        <h2>Account Settings</h2>
+    <body id="login_body">
+    <form id="login_form" method="POST">
+        <h2 id="login_h2">Account Settings</h2>
 
         <?php if (isset($_GET['error'])) { ?>
             <p class="error"><?php echo $_GET['error']; ?> </p>
             <?php } ?>
 
-        <label>First Name</label>
-        <input type="text" name="first_name" value = <?php echo $credentials['first_name'];?> ><br>
+        <label id="login_label">First Name</label>
+        <input id="login_input" type="text" name="first_name" value = <?php echo $credentials['first_name'];?> ><br>
 
-        <label>Last Name</label>
-        <input type="text" name="last_name" value = <?php echo $credentials['last_name'];?>><br>
+        <label id="login_label">Last Name</label>
+        <input id="login_input" type="text" name="last_name" value = <?php echo $credentials['last_name'];?>><br>
 
-        <label> Date of Birth</label>
-        <input type="date" name="date_of_birth" value = <?php echo $credentials['date_of_birth'];?> ><br>
+        <label id="login_label"> Date of Birth</label>
+        <input id="login_input"type="date" name="date_of_birth" value = <?php echo $credentials['date_of_birth'];?> ><br>
 
-        <label>Email</label>
-        <input readonly style="background-color: grey;" type="text" name="email" value = <?php echo $credentials['email'];?>><br>
+        <label id="login_label">Email</label>
+        <input id="login_input" readonly style="background-color: grey;" type="text" name="email" value = <?php echo $credentials['email'];?>><br>
 
-        <label> Favorite Movie </label>
+        <label id="login_label"> Favorite Movie </label>
         <br>
         <select name="fav_movie">
             <?php
@@ -506,7 +506,7 @@ function get_fav_genre(PDO $pdo, int $id){
         </select>
         <br>
 
-        <label> Favorite Show </label>
+        <label id="login_label"> Favorite Show </label>
         <br>
         <select name="fav_show">
             <?php
@@ -534,7 +534,7 @@ function get_fav_genre(PDO $pdo, int $id){
         </select>
         <br>
 
-        <label> Favorite Actor/Actress </label>
+        <label id="login_label"> Favorite Actor/Actress </label>
         <br>
         <select name="fav_actor">
             <?php
@@ -562,7 +562,7 @@ function get_fav_genre(PDO $pdo, int $id){
         </select>
         <br>
 
-        <label> Favorite Genre </label>
+        <label id="login_label"> Favorite Genre </label>
         <br>
         <select name="fav_genre">
             <?php
@@ -590,7 +590,7 @@ function get_fav_genre(PDO $pdo, int $id){
         </select>
         <br>
 
-        <Label> Supscription Plan</label>
+        <Label id="login_label"> Supscription Plan</label>
         <br>
         <select name="subscription_plan">
             <?php
@@ -605,20 +605,20 @@ function get_fav_genre(PDO $pdo, int $id){
         <br>
         <br>
 
-        <label> New Password</label>
-        <input type="password" name="password" placeholder="Password"><br>
+        <label id="login_label"> New Password</label>
+        <input id="login_input" type="password" name="password" placeholder="Password"><br>
 
 
-        <label>Confirm Password</label>
-        <input type="password" name="confirm_password" placeholder="Confirm Password"><br>
+        <label id="login_label">Confirm Password</label>
+        <input id="login_input" type="password" name="confirm_password" placeholder="Confirm Password"><br>
         
-        <input type="hidden" id="action" name="action" value="">
+        <input id="login_input" type="hidden" id="action" name="action" value="">
         
-        <button type="button" name="update" onclick="confirm_action('u')">Update Profile</button>
+        <button id="login_button" type="button" name="update" onclick="confirm_action('u')">Update Profile</button>
 
-        <button type="button" name="logout" onclick="confirm_action('l')">Log Out</button>
+        <button id="login_button" type="button" name="logout" onclick="confirm_action('l')">Log Out</button>
 
-        <button type="button" name="delete" onclick="confirm_action('d')" style="background: red">Delete Account</button>
+        <button id="login_button" type="button" name="delete" onclick="confirm_action('d')" style="background: red">Delete Account</button>
 
         <a href="browse.php">Back to Browse</a>
 
