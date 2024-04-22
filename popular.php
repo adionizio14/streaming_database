@@ -79,8 +79,9 @@ function get_show_info(PDO $pdo, string $id) {
 </head>
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0d3fa9">
-            <a class="navbar-brand" href="browse.php">Blockbuster++</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <a class="navbar-brand mr-1" href="browse.php">
+                <img src="image/IMG_0007.PNG" width="110" height="60" alt="">
+            </a>            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
