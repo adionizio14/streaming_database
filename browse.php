@@ -1,6 +1,7 @@
 <?php
 session_start();
-require 'includes/database-connection.php'; 
+require 'includes/database-connection.php';
+print_r($_SESSION['cust_id']) 
 ?>
 
 <!DOCTYPE html>
