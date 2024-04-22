@@ -53,7 +53,7 @@ require 'includes/database-connection.php';		// Include the database connection 
         <label label id="login_label">Confirm Password</label>
         <input id="login_input" type="password" name="confirm_password" placeholder="Confirm Password"><br>
 
-        <button type="submit">Sign Up</button>
+        <button id="login_button" type="submit">Sign Up</button>
     </form>
 
     <?php
