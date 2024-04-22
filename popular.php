@@ -1,20 +1,19 @@
 <?php
 session_start();
 require 'includes/database-connection.php'; 
-print_r($_SESSION['cust_id']) 
 
 function get_mov_info(PDO $pdo, string $id) {
 
     // SQL query to retrieve username and password from the database
-    $sql = "SELECT title, release_year, runtime, rating, imgSrc
+    $sql = "SELECT title, release_year, runtime, rating, imgSrc 
         FROM Movies
-        where movie_ID= :id;";		// Select the email and password from the customer table where the email is equal to the value of :id
+        where movie_ID= :id and rating > '9';";		// Select the email and password from the customer table where the email is equal to the value of :id
 
     // Execute the SQL query using the pdo function and fetch the result
     $mov_info = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
     // Return the toy mov_information (associative array)
-    return $mov_info;
+    return $mov_info ? $mov_info : false;
 
 }
     // SQL query to retrieve all toy IDs from the database
@@ -29,10 +28,10 @@ function get_mov_info(PDO $pdo, string $id) {
 
     // Iterate over each toy ID
     foreach ($movie_ids as $id) {
-        // Retrieve info about the toy with the current ID from the db using provided PDO connection
-        $Movies = get_mov_info($pdo, $id);
-        // Add the retrieved toy information to the array
-        $movs[$id] = $Movies;
+        $movie_info = get_mov_info($pdo, $id);
+        if ($movie_info !== false) {
+            $movs[$id] = $movie_info;
+        }
     }
 
 // Now $toys array will contain information about all the toys
@@ -42,14 +41,13 @@ function get_show_info(PDO $pdo, string $id) {
     // SQL query to retrieve username and password from the database
     $sql = "SELECT title, release_year, rating, imgSrc
         FROM Shows
-        where show_ID= :id;";		// Select the email and password from the customer table where the email is equal to the value of :id
+        where show_ID= :id and rating > '9';";		// Select the email and password from the customer table where the email is equal to the value of :id
 
     // Execute the SQL query using the pdo function and fetch the result
     $show_info = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
     // Return the toy mov_information (associative array)
-    return $show_info;
-
+    return $show_info ? $show_info : false;
 }
     // SQL query to retrieve all toy IDs from the database
     $sql = "SELECT Show_ID FROM Shows";
@@ -63,10 +61,10 @@ function get_show_info(PDO $pdo, string $id) {
 
     // Iterate over each toy ID
     foreach ($show_ids as $id) {
-        // Retrieve info about the toy with the current ID from the db using provided PDO connection
-        $Shows = get_show_info($pdo, $id);
-        // Add the retrieved toy information to the array
-        $shos[$id] = $Shows;
+        $show_info = get_show_info($pdo, $id);
+        if ($show_info !== false) {
+            $shos[$id] = $show_info;
+        }
     }
 
 // Now $toys array will contain information about all the toys
@@ -134,7 +132,7 @@ function get_show_info(PDO $pdo, string $id) {
                     <p class="runtime">Runtime: <?php echo $movs_inf['runtime']; ?></p>
                     <p class="rating">Rating: <?php echo $movs_inf['rating']; ?></p>
                 <?php else: ?>
-                    <p class="error">Movie information not available</p>
+                    <p>Movie information not available</p>
                 <?php endif; ?>
                 </div>
             </div>
@@ -155,7 +153,7 @@ function get_show_info(PDO $pdo, string $id) {
                     <p class="release_year">Release Year: <?php echo $shos_inf['release_year']; ?></p>
                     <p class="rating">Rating: <?php echo $shos_inf['rating']; ?></p>
                 <?php else: ?>
-                    <p class="error">Movie information not available</p>
+                    <p>Movie information not available</p>
                 <?php endif; ?>
                 </div>
             </div>

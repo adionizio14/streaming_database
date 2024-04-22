@@ -1,7 +1,6 @@
 <?php
 session_start();
 require 'includes/database-connection.php'; 
-print_r($_SESSION['cust_id']) 
 
 function get_mov_info(PDO $pdo, string $id) {
 
@@ -33,40 +32,6 @@ function get_mov_info(PDO $pdo, string $id) {
         $Movies = get_mov_info($pdo, $id);
         // Add the retrieved toy information to the array
         $movs[$id] = $Movies;
-    }
-
-// Now $toys array will contain information about all the toys
-
-function get_show_info(PDO $pdo, string $id) {
-
-    // SQL query to retrieve username and password from the database
-    $sql = "SELECT title, release_year, rating, imgSrc
-        FROM Shows
-        where show_ID= :id;";		// Select the email and password from the customer table where the email is equal to the value of :id
-
-    // Execute the SQL query using the pdo function and fetch the result
-    $show_info = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
-
-    // Return the toy mov_information (associative array)
-    return $show_info;
-
-}
-    // SQL query to retrieve all toy IDs from the database
-    $sql = "SELECT Show_ID FROM Shows";
-
-    // Execute the SQL query using PDO and fetch all the toy IDs
-    $statement = $pdo->query($sql);
-    $show_ids = $statement->fetchAll(PDO::FETCH_COLUMN);
-
-    // Create an empty array to store toy information
-    $shos = [];
-
-    // Iterate over each toy ID
-    foreach ($show_ids as $id) {
-        // Retrieve info about the toy with the current ID from the db using provided PDO connection
-        $Shows = get_show_info($pdo, $id);
-        // Add the retrieved toy information to the array
-        $shos[$id] = $Shows;
     }
 
 // Now $toys array will contain information about all the toys
@@ -139,26 +104,5 @@ function get_show_info(PDO $pdo, string $id) {
                 </div>
             </div>
             <?php endforeach; ?>
-
-            <?php foreach ($shos as $shos_inf): ?>
-            <div class="card">
-                <div class="image">
-                <?php if (is_array($shos_inf)): ?>
-                    <img src=<?php echo $shos_inf['imgSrc']; ?>>
-                <?php else: ?>
-                    <p>Movie image not available</p>
-                <?php endif; ?>
-                </div>
-                <div class="caption">
-                <?php if (is_array($shos_inf)): ?>
-                    <p class="title">Title: <?php echo $shos_inf['title']; ?></p>
-                    <p class="release_year">Release Year: <?php echo $shos_inf['release_year']; ?></p>
-                    <p class="rating">Rating: <?php echo $shos_inf['rating']; ?></p>
-                <?php else: ?>
-                    <p class="error">Movie information not available</p>
-                <?php endif; ?>
-                </div>
-            </div>
-            <?php endforeach; ?>
-        </main>
+            </main>
 </body>

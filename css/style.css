@@ -1,5 +1,5 @@
-body {
-    background: #344955;
+#login_body {
+    background: #0d3fa9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -11,7 +11,7 @@ body {
     box-sizing: border-box;
 }
 
-form{
+#login_form{
     width: 500px;
     border: 2px solid #ccc;
     padding: 30px;
@@ -19,12 +19,12 @@ form{
     border-radius: 15px;
 }
 
-h2 {
+#login_h2 {
     text-align: center;
     margin-bottom: 40px;
 }
 
-input {
+#login_input {
     display: block;
     border: 2px solid #ccc;
     width: 95%;
@@ -33,13 +33,13 @@ input {
     border-radius: 5px;
 }
 
-label {
+#login_label {
     color: #888;
     font-size: 18px;
     padding: 10px;
 }
 
-button{
+#login_button{
     float: right;
     background: #555;
     padding: 10px 15px;
@@ -60,3 +60,50 @@ button:hover{
     margin-bottom: 20px;
     font-size: 14px;
 }
+
+
+
+
+
+main {
+    max-width: 1500px;
+    width: 95%;
+    margin: 30px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin: auto;
+}
+
+main .card {
+    max-width: 300px;
+    flex: 1 1 210px;
+    text-align: center;
+    height: auto;
+    border: 1px solid white;
+    margin: 20px;
+    margin-bottom: auto;
+}
+
+main .card .image {
+    height: 50%;
+    margin-bottom: 20px;
+}
+
+main .card .image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+main .card .caption {
+    padding-left: 1em;
+    text-align: left;
+    line-height: 3em;
+    height: 25%;
+}
+
+main .card p {
+    font-size: 1.5rem;
+}
+
