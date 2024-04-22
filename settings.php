@@ -208,7 +208,7 @@ function get_fav_genre(PDO $pdo, int $id){
 
 <?php
     if(isset($_POST['action'])){
-        print("submitted");
+        
         $action = $_POST['action'];
 
         if($action == 'u'){
