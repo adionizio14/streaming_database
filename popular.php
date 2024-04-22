@@ -7,13 +7,13 @@ function get_mov_info(PDO $pdo, string $id) {
     // SQL query to retrieve username and password from the database
     $sql = "SELECT title, release_year, runtime, rating, imgSrc 
         FROM Movies
-        where movie_ID= :id and rating > '8';";		// Select the email and password from the customer table where the email is equal to the value of :id
+        where movie_ID= :id and rating > '9';";		// Select the email and password from the customer table where the email is equal to the value of :id
 
     // Execute the SQL query using the pdo function and fetch the result
     $mov_info = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
     // Return the toy mov_information (associative array)
-    return $mov_info;
+    return $mov_info ? $mov_info : false;
 
 }
     // SQL query to retrieve all toy IDs from the database
@@ -28,10 +28,10 @@ function get_mov_info(PDO $pdo, string $id) {
 
     // Iterate over each toy ID
     foreach ($movie_ids as $id) {
-        // Retrieve info about the toy with the current ID from the db using provided PDO connection
-        $Movies = get_mov_info($pdo, $id);
-        // Add the retrieved toy information to the array
-        $movs[$id] = $Movies;
+        $movie_info = get_mov_info($pdo, $id);
+        if ($movie_info !== false) {
+            $movs[$id] = $movie_info;
+        }
     }
 
 // Now $toys array will contain information about all the toys
@@ -41,14 +41,13 @@ function get_show_info(PDO $pdo, string $id) {
     // SQL query to retrieve username and password from the database
     $sql = "SELECT title, release_year, rating, imgSrc
         FROM Shows
-        where show_ID= :id and rating > '8';";		// Select the email and password from the customer table where the email is equal to the value of :id
+        where show_ID= :id and rating > '9';";		// Select the email and password from the customer table where the email is equal to the value of :id
 
     // Execute the SQL query using the pdo function and fetch the result
     $show_info = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
     // Return the toy mov_information (associative array)
-    return $show_info;
-
+    return $show_info ? $show_info : false;
 }
     // SQL query to retrieve all toy IDs from the database
     $sql = "SELECT Show_ID FROM Shows";
@@ -62,10 +61,10 @@ function get_show_info(PDO $pdo, string $id) {
 
     // Iterate over each toy ID
     foreach ($show_ids as $id) {
-        // Retrieve info about the toy with the current ID from the db using provided PDO connection
-        $Shows = get_show_info($pdo, $id);
-        // Add the retrieved toy information to the array
-        $shos[$id] = $Shows;
+        $show_info = get_show_info($pdo, $id);
+        if ($show_info !== false) {
+            $shos[$id] = $show_info;
+        }
     }
 
 // Now $toys array will contain information about all the toys
@@ -74,13 +73,13 @@ function get_show_info(PDO $pdo, string $id) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chows and Moovies</title>
+    <title>Blockbuster++</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #344955">
-            <a class="navbar-brand" href="browse.php">Chows and Moovies</a>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0d3fa9">
+            <a class="navbar-brand" href="browse.php">Blockbuster++</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>

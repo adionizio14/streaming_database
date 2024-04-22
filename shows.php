@@ -39,13 +39,13 @@ function get_show_info(PDO $pdo, string $id) {
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Chows and Moovies</title>
+    <title>Blockbuster++</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #344955">
-            <a class="navbar-brand" href="browse.php">Chows and Moovies</a>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0d3fa9">
+            <a class="navbar-brand" href="browse.php">Blockbuster++</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
