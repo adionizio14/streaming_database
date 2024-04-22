@@ -79,9 +79,10 @@ main .card {
     max-width: 300px;
     flex: 1 1 210px;
     text-align: center;
-    height: 550px;
+    height: auto;
     border: 1px solid white;
     margin: 20px;
+    margin-bottom: auto;
 }
 
 main .card .image {

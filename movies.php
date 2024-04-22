@@ -5,7 +5,7 @@ require 'includes/database-connection.php';
 function get_mov_info(PDO $pdo, string $id) {
 
     // SQL query to retrieve username and password from the database
-    $sql = "SELECT title, release_year, runtime, rating 
+    $sql = "SELECT title, release_year, runtime, rating, imgSrc
         FROM Movies
         where movie_ID= :id;";		// Select the email and password from the customer table where the email is equal to the value of :id
 
@@ -85,9 +85,13 @@ function get_mov_info(PDO $pdo, string $id) {
         <main>
             <?php foreach ($movs as $movs_inf): ?>
             <div class="card">
-                <!-- <div class="image">
-                    <img src="https://m.media-amazon.com/images/M/MV5BM2MyNjYxNmUtYTAwNi00MTYxLWJmNWYtYzZlODY3ZTk3OTFlXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_.jpg">
-                </div> -->
+                <div class="image">
+                <?php if (is_array($movs_inf)): ?>
+                    <img src=<?php echo $movs_inf['imgSrc']; ?>>
+                <?php else: ?>
+                    <p>Movie image not available</p>
+                <?php endif; ?>
+                </div>
                 <div class="caption">
                 <?php if (is_array($movs_inf)): ?>
                     <p class="title">Title: <?php echo $movs_inf['title']; ?></p>
