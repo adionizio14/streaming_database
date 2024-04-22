@@ -208,6 +208,7 @@ function get_fav_genre(PDO $pdo, int $id){
 
 <?php
     if(isset($_POST['action'])){
+        print("submitted");
         $action = $_POST['action'];
 
         if($action == 'u'){
@@ -612,7 +613,7 @@ function get_fav_genre(PDO $pdo, int $id){
         <label id="login_label">Confirm Password</label>
         <input id="login_input" type="password" name="confirm_password" placeholder="Confirm Password"><br>
         
-        <input id="login_input" type="hidden" id="action" name="action" value="">
+        <input type="hidden" id="action" name="action" value="">
         
         <button id="login_button" type="button" name="update" onclick="confirm_action('u')">Update Profile</button>
 
@@ -639,7 +640,7 @@ function get_fav_genre(PDO $pdo, int $id){
                 
                 if(confirmed){
                     document.getElementById("action").value = action;
-                    document.getElementById("form").submit();
+                    document.getElementById("login_form").submit();
                 }
                 
             }

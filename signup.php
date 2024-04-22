@@ -116,15 +116,7 @@ require 'includes/database-connection.php';		// Include the database connection 
                 pdo($pdo, $sql, ['cust_id' => $customer_id['cust_id'], 'subscription_id' => $subscription_plan_id['subscription_id']]);
 
 
-
-                // Redirect to the login page
-                $url = $_SERVER['HTTP_REFERER'];
-                // cut the url to get everything before the last /
-                $url = substr($url, 0, strrpos($url, '/'));
-                // add the browse.php to the url
-                $url = $url . '/login.php';
-
-                header("Location: $url");
+                header("Location: login.php");
             }
         }
     ?>

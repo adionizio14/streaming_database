@@ -35,17 +35,12 @@
             // Check if the password is correct
             if ($credentials && password_verify($password, $credentials['password'])) {
 
-                // Redirect to the browse page
-                // get current url
-                $url = $_SERVER['HTTP_REFERER'];
-                // cut the url to get everything before the last /
-                $url = substr($url, 0, strrpos($url, '/'));
-                // add the browse.php to the url
                 $cust_id = $credentials['cust_id'];
                 $_SESSION['cust_id'] = $cust_id;
-                $url = $url . '/browse.php';
+
+                //print($url);
                 
-                header("Location: $url");
+                header("Location: browse.php");
                 exit();
             }
 
