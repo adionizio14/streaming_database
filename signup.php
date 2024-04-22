@@ -1,5 +1,7 @@
 <?php
-
+session_start();
+ob_start();
+error_reporting(E_ALL);
 require 'includes/database-connection.php';		// Include the database connection file
 
 ?>

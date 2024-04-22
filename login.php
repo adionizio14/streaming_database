@@ -1,7 +1,8 @@
 <?php
 
     session_start();
-
+    ob_start();
+    error_reporting(E_ALL);
     // Require the database connection file
     require 'includes/database-connection.php';
 
