@@ -46,15 +46,17 @@ function get_mov_info(PDO $pdo, string $id) {
 </head>
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0d3fa9">
-            <a class="navbar-brand" href="browse.php">Blockbuster++</a>
+            <a class="navbar-brand mr-1" href="browse.php">
+                <img src="image/Untitled design (6).PNG" width="110" height="100" alt="">
+            </a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="movies.php">Movies</a>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="movies.php">Movies <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="shows.php">Shows</a>
@@ -62,9 +64,24 @@ function get_mov_info(PDO $pdo, string $id) {
                     <li class="nav-item">
                         <a class="nav-link" href="popular.php">Popular</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="genre.php">Genre</a>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Genre</a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Adventure</a>
+                            <a class="dropdown-item" href="#">Comedy</a>
+                            <a class="dropdown-item" href="#">Crime</a>
+                            <a class="dropdown-item" href="#">Documentary</a>
+                            <a class="dropdown-item" href="#">Drama</a>
+                            <a class="dropdown-item" href="#">Fantasy</a>
+                            <a class="dropdown-item" href="#">Horror</a>
+                            <a class="dropdown-item" href="#">Romance</a>
+                            <a class="dropdown-item" href="#">Science Fiction</a>
+                            <a class="dropdown-item" href="#">Thriller</a>
+                        </div>
                     </li>
+
                     <li class="nav-item">
                         <form class="form-inline ml-3">
                             <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
@@ -105,4 +122,14 @@ function get_mov_info(PDO $pdo, string $id) {
             </div>
             <?php endforeach; ?>
             </main>
+
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.dropdown-toggle').dropdown();
+        });
+    </script>
 </body>
