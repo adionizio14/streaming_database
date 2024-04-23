@@ -105,17 +105,16 @@ function get_show_info(PDO $pdo, string $id) {
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Genre</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="genre.php">Action</a>
-                            <a class="dropdown-item" href="genre.php">Adventure</a>
-                            <a class="dropdown-item" href="genre.php">Comedy</a>
-                            <a class="dropdown-item" href="genre.php">Crime</a>
-                            <a class="dropdown-item" href="genre.php">Documentary</a>
-                            <a class="dropdown-item" href="genre.php">Drama</a>
-                            <a class="dropdown-item" href="genre.php">Fantasy</a>
-                            <a class="dropdown-item" href="genre.php">Horror</a>
-                            <a class="dropdown-item" href="genre.php">Romance</a>
-                            <a class="dropdown-item" href="genre.php">Science Fiction</a>
-                            <a class="dropdown-item" href="genre.php">Thriller</a>
+                            <a class="dropdown-item" href="genre.php?genrenum=1">Action</a>
+                            <a class="dropdown-item" href="genre.php?genrenum=7">Adventure</a>
+                            <a class="dropdown-item" href="genre.php?genrenum=2">Comedy</a>
+                            <a class="dropdown-item" href="genre.php?genrenum=11">Crime</a>
+                            <a class="dropdown-item" href="genre.php?genrenum=3">Drama</a>
+                            <a class="dropdown-item" href="genre.php?genrenum=6">Fantasy</a>
+                            <a class="dropdown-item" href="genre.php?genrenum=9">Horror</a>
+                            <a class="dropdown-item" href="genre.php?genrenum=8">Romance</a>
+                            <a class="dropdown-item" href="genre.php?genrenum=5">Science Fiction</a>
+                            <a class="dropdown-item" href="genre.php?genrenum=4">Thriller</a>
                         </div>
                     </li>
 
