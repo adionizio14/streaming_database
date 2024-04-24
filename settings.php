@@ -455,7 +455,7 @@ function get_fav_genre(PDO $pdo, int $id){
 
 
     <head>
-        <title>Settings</title>
+        <title>Blockbuster++</title>
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
     </head>

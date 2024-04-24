@@ -10,12 +10,12 @@ require 'includes/database-connection.php';		// Include the database connection 
 
 <html>
 <head>
-    <title>Sign Up</title>
+    <title>Blockbuster++</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
-<body id="login_body">
-    <form id="login_form" method="POST">
+<body id="settings_body">
+    <form id="settings_form" method="POST">
         <h2 id="login_h2">Sign Up</h2>
 
         <?php if (isset($_GET['error'])) { ?>
