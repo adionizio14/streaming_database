@@ -86,7 +86,7 @@ main {
 }
 
 main .card {
-    max-width: 300px;
+    max-width: 260px;
     text-align: center;
     height: auto;
     border: 1px solid white;
