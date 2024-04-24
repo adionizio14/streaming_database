@@ -28,6 +28,10 @@
     margin-top: -72px;
 }
 
+a {
+    text-decoration: none;
+}
+
 #login_h2 {
     text-align: center;
     margin-bottom: 40px;
