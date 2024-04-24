@@ -117,7 +117,9 @@ function get_show_info(PDO $pdo, string $id, string $search) {
                             <a class="dropdown-item" href="genre.php?genrenum=4">Thriller</a>
                         </div>
                     </li>
+                </ul>
 
+                <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
                         <form class="form-inline ml-3" action="search.php" method="GET">
                             <input class="form-control mr-sm-2" name = "query" placeholder="Search" aria-label="Search">
