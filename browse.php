@@ -119,8 +119,8 @@ function get_show_info(PDO $pdo, string $id) {
                     </li>
 
                     <li class="nav-item">
-                        <form class="form-inline ml-3">
-                            <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+                        <form class="form-inline ml-3" action="search.php" method="GET">
+                            <input class="form-control mr-sm-2" name = "query" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>
