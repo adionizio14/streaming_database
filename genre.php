@@ -85,7 +85,7 @@ function get_show_info(PDO $pdo, string $id, string $genre_id) {
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0d3fa9">
+        <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0d3fa9">
             <a class="navbar-brand mr-1" href="browse.php">
                 <img src="image/Untitled design (6).PNG" width="110" height="100" alt="">
             </a>            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -128,7 +128,7 @@ function get_show_info(PDO $pdo, string $id, string $genre_id) {
                     </li>
                 </ul>
 
-                <ul class="navbar-nav mr">
+                <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link" href="settings.php">Settings</a>
                     </li>
