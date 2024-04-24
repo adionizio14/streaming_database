@@ -7,6 +7,14 @@
     height: auto;
 }
 
+#settings_body {
+    background: #0d3fa9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -26,6 +34,14 @@
     background: #fff;
     border-radius: 15px;
     margin-top: -72px;
+}
+
+#settings_form{
+    width: 500px;
+    border: 2px solid #ccc;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
 }
 
 a {
@@ -92,6 +108,9 @@ main .card {
     border: 1px solid white;
     margin: 20px;
     margin-bottom: auto;
+/* 
+    background-color: #0d3fa9;
+    padding: 20px; */
 }
 
 main .card .image {
@@ -110,6 +129,7 @@ main .card .caption {
     text-align: left;
     line-height: 3em;
     height: 25%;
+    /* color: white; */
 }
 
 main .card p {
@@ -120,4 +140,9 @@ main .card p {
 .navbar {
     max-height: 100px;
     font-size: 20px;
+    
 }
+
+/* .navbar-nav .nav-link {
+    color: white !important;
+} */

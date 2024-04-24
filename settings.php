@@ -460,8 +460,8 @@ function get_fav_genre(PDO $pdo, int $id){
 
     </head>
 
-    <body id="login_body">
-    <form id="login_form" method="POST">
+    <body id="settings_body">
+    <form id="settings_form" method="POST">
         <h2 id="login_h2">Account Settings</h2>
 
         <?php if (isset($_GET['error'])) { ?>
