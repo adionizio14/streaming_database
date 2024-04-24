@@ -641,7 +641,7 @@ function get_fav_genre(PDO $pdo, int $id){
                 
                 if(confirmed){
                     document.getElementById("action").value = action;
-                    document.getElementById("login_form").submit();
+                    document.getElementById("settings_form").submit();
                 }
                 
             }
