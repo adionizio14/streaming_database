@@ -100,11 +100,11 @@ function get_show_info(PDO $pdo, string $id, string $genre_id) {
                     <li class="nav-item">
                         <a class="nav-link" href="shows.php">Shows</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="popular.php">Popular <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="popular.php">Popular</a>
                     </li>
 
-                    <li class="nav-item dropdown">
+                    <li class="nav-item dropdown active">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Genre</a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="genre.php?genrenum=1">Action</a>
@@ -121,8 +121,8 @@ function get_show_info(PDO $pdo, string $id, string $genre_id) {
                     </li>
 
                     <li class="nav-item">
-                        <form class="form-inline ml-3">
-                            <input class="form-control mr-sm-2" placeholder="Search" aria-label="Search">
+                        <form class="form-inline ml-3" action="search.php" method="GET">
+                            <input class="form-control mr-sm-2" name = "query" placeholder="Search" aria-label="Search">
                             <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
                         </form>
                     </li>

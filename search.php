@@ -1,20 +1,22 @@
 <?php
 session_start();
 require 'includes/database-connection.php'; 
+//print_r($_SESSION['cust_id']);
+$search = $_GET['query'];
 
-function get_mov_info(PDO $pdo, string $id) {
+function get_mov_info(PDO $pdo, string $id, string $search) {
 
     // SQL query to retrieve username and password from the database
-    $sql = "SELECT title, release_year, runtime, rating, imgSrc 
+    $sql = "SELECT title, release_year, runtime, rating, imgSrc
         FROM Movies
-        where movie_ID= :id and rating > '9';";		// Select the email and password from the customer table where the email is equal to the value of :id
+        where movie_ID= :id
+        AND title LIKE :search;";		// Select the email and password from the customer table where the email is equal to the value of :id
 
     // Execute the SQL query using the pdo function and fetch the result
-    $mov_info = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
+    $mov_info = pdo($pdo, $sql, ['id' => $id, 'search' => '%' . $search . '%'])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
     // Return the toy mov_information (associative array)
-    return $mov_info ? $mov_info : false;
-
+    return $mov_info;
 }
     // SQL query to retrieve all toy IDs from the database
     $sql = "SELECT movie_ID FROM Movies";
@@ -28,7 +30,7 @@ function get_mov_info(PDO $pdo, string $id) {
 
     // Iterate over each toy ID
     foreach ($movie_ids as $id) {
-        $movie_info = get_mov_info($pdo, $id);
+        $movie_info = get_mov_info($pdo, $id, $search);
         if ($movie_info !== false) {
             $movs[$id] = $movie_info;
         }
@@ -36,18 +38,20 @@ function get_mov_info(PDO $pdo, string $id) {
 
 // Now $toys array will contain information about all the toys
 
-function get_show_info(PDO $pdo, string $id) {
+function get_show_info(PDO $pdo, string $id, string $search) {
 
     // SQL query to retrieve username and password from the database
     $sql = "SELECT title, release_year, rating, imgSrc
         FROM Shows
-        where show_ID= :id and rating > '9';";		// Select the email and password from the customer table where the email is equal to the value of :id
+        where show_ID= :id
+        AND title LIKE :search;";		// Select the email and password from the customer table where the email is equal to the value of :id
 
     // Execute the SQL query using the pdo function and fetch the result
-    $show_info = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
+    $show_info = pdo($pdo, $sql, ['id' => $id, 'search' => '%' . $search . '%'])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
 
     // Return the toy mov_information (associative array)
-    return $show_info ? $show_info : false;
+    return $show_info;
+
 }
     // SQL query to retrieve all toy IDs from the database
     $sql = "SELECT Show_ID FROM Shows";
@@ -61,7 +65,7 @@ function get_show_info(PDO $pdo, string $id) {
 
     // Iterate over each toy ID
     foreach ($show_ids as $id) {
-        $show_info = get_show_info($pdo, $id);
+        $show_info = get_show_info($pdo, $id, $search);
         if ($show_info !== false) {
             $shos[$id] = $show_info;
         }
@@ -93,8 +97,8 @@ function get_show_info(PDO $pdo, string $id) {
                     <li class="nav-item">
                         <a class="nav-link" href="shows.php">Shows</a>
                     </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="popular.php">Popular <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="popular.php">Popular</a>
                     </li>
 
                     <li class="nav-item dropdown">
