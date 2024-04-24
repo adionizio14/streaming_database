@@ -62,22 +62,18 @@ button:hover{
 }
 
 
-
-
-
 main {
     max-width: 1500px;
     width: 95%;
     margin: 30px auto;
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
-    margin: auto;
+    justify-content: start;
+    margin-top: 110px;
 }
 
 main .card {
     max-width: 300px;
-    flex: 1 1 210px;
     text-align: center;
     height: auto;
     border: 1px solid white;
@@ -107,3 +103,7 @@ main .card p {
     font-size: 1.5rem;
 }
 
+
+.navbar {
+    max-height: 100px;
+}
