@@ -1,9 +1,17 @@
 #login_body {
     background: #0d3fa9;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: start;
     align-items: center;
-    height: 100vh;
+    height: auto;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -80px; /* Adjust this value as needed to position the form below the image */
 }
 
 *{
@@ -17,6 +25,7 @@
     padding: 30px;
     background: #fff;
     border-radius: 15px;
+    margin-top: -80px;
 }
 
 #login_h2 {

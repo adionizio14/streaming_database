@@ -58,12 +58,16 @@
 <html>
 <head>
 
-    <title>Login</title>
+    <title>Blockbuster++</title>
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
 
 <body id="login_body">
+
+<div class="container">
+<img src="image/Untitled design (6).PNG" alt="">
+
     <form id="login_form" method="POST">
         <h2 id="login_h2">Login</h2>
 
@@ -82,6 +86,7 @@
         <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
         
     </form>
+        </div>
     
 </body>
 
