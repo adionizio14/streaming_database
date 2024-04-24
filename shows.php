@@ -46,7 +46,7 @@ function get_show_info(PDO $pdo, string $id) {
 <body>
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0d3fa9">
             <a class="navbar-brand mr-1" href="browse.php">
-                <img src="image/Untitled design (6).PNG" width="110" height="100" alt="">
+                <img src="image/Untitled design (6).PNG" width="150" height="150" alt="">
             </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
