@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    margin-top: -80px; /* Adjust this value as needed to position the form below the image */
+    margin-top: -70px;
 }
 
 *{
@@ -25,7 +25,7 @@
     padding: 30px;
     background: #fff;
     border-radius: 15px;
-    margin-top: -80px;
+    margin-top: -72px;
 }
 
 #login_h2 {
