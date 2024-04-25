@@ -59,6 +59,7 @@
 <head>
 
     <title>Blockbuster++</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
@@ -81,10 +82,15 @@
         <label id="login_label">Password</label>
         <input id="login_input" type="password" name="password" placeholder="Password"><br>
 
-        <button id="login_button" type="submit">Login</button>
+        <div id="login_contain">
+        <button id="log_button" type="submit">Login</button>
 
-        <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
-        
+        <hr id="login_divider">
+        <!-- <p>Don't have an account? <a href="signup.php">Sign Up</a></p> -->
+
+        <button id="log_button" type="button" onclick="window.location.href='signup.php';">New User</button>
+        </div>
+
     </form>
         </div>
     
