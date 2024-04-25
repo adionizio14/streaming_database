@@ -74,8 +74,12 @@ require 'includes/database-connection.php';		// Include the database connection 
             
 
             // print_r($date_of_birth);
-            // Check if the password and confirm password match
-            if ($password != $confirm_password) {
+            // Check if password meets the requirements
+            if (strlen($password) < 8 || !preg_match("#[0-9]+#", $password) || !preg_match("#[A-Z]+#", $password) || !preg_match("#\W+#", $password)){
+                header("Location: signup.php?error=Password must be at least 8 characters long, contain at least one number, and one special character, and one uppercase letter");
+                exit();
+            }
+            else if ($password != $confirm_password) {
                 header("Location: signup.php?error=Passwords do not match");
                 exit();
             }
