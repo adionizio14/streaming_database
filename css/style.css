@@ -1,3 +1,40 @@
+*{
+    font-family: sans-serif;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+}
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: -70px;
+}
+
+.error {
+    color: #af4242;
+    background-color: #fde8ec;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 5px;
+}
+
+.navbar {
+    max-height: 100px;
+    font-size: 20px;
+    
+}
+
+#login_divider {
+    border-top: 3px solid #bbb;
+    border-radius: 5px;
+    width: 400px;
+  }
+
 #login_body {
     background: #0d3fa9;
     display: flex;
@@ -7,26 +44,6 @@
     height: auto;
 }
 
-#settings_body {
-    background: #0d3fa9;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: -70px;
-}
-
-*{
-    font-family: sans-serif;
-    box-sizing: border-box;
-}
-
 #login_form{
     width: 500px;
     border: 2px solid #ccc;
@@ -34,18 +51,7 @@
     background: #fff;
     border-radius: 15px;
     margin-top: -72px;
-}
-
-#settings_form{
-    width: 500px;
-    border: 2px solid #ccc;
-    padding: 30px;
-    background: #fff;
-    border-radius: 15px;
-}
-
-a {
-    text-decoration: none;
+    margin: 15px;
 }
 
 #login_h2 {
@@ -58,7 +64,7 @@ a {
     border: 2px solid #ccc;
     width: 95%;
     padding: 10px;
-    margin: 10px auto;
+    margin: auto;
     border-radius: 5px;
 }
 
@@ -70,24 +76,55 @@ a {
 
 #login_button{
     float: right;
-    background: #555;
+    background: #ffa900;
     padding: 10px 15px;
     color: #fff;
     border-radius: 5px;
     margin-right: 10px;
+    margin: 5px;
     border: none;
 }
 button:hover{
     opacity: .7;
 }
 
-.error {
-    color: #af4242;
-    background-color: #fde8ec;
-    padding: 10px;
-    transform: translateY(-20px);
-    margin-bottom: 20px;
-    font-size: 14px;
+#log_button{
+    background: #ffa900;
+    padding: 10px 15px;
+    color: #fff;
+    border-radius: 5px;
+    margin: 15px;
+    border: none;
+
+    width: 300px;
+    height: 60px;
+}
+button:hover{
+    opacity: .7;
+}
+
+#login_contain {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+#settings_body {
+    background: #0d3fa9;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+}
+
+#settings_form{
+    width: 500px;
+    border: 2px solid #ccc;
+    padding: 30px;
+    background: #fff;
+    border-radius: 15px;
+    margin: 100px;
 }
 
 
@@ -108,9 +145,6 @@ main .card {
     border: 1px solid white;
     margin: 20px;
     margin-bottom: auto;
-/* 
-    background-color: #0d3fa9;
-    padding: 20px; */
 }
 
 main .card .image {
@@ -129,32 +163,8 @@ main .card .caption {
     text-align: left;
     line-height: 3em;
     height: 25%;
-    /* color: white; */
 }
 
 main .card p {
     font-size: 1.5rem;
 }
-
-
-.navbar {
-    max-height: 100px;
-    font-size: 20px;
-    
-}
-
-/* .navbar-nav .nav-link {
-    color: white !important;
-} */
-
-/* a:link {
-    color:white;
-    background-color:#0d3fa9;
-    text-decoration: none;
-  }
-
-  a:visited {
-    color:white;
-    background-color:#0d3fa9;
-    text-decoration: none;
-  } */

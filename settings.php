@@ -616,14 +616,22 @@ function get_fav_genre(PDO $pdo, int $id){
         <input id="login_input" type="password" name="confirm_password" placeholder="Confirm Password"><br>
         
         <input type="hidden" id="action" name="action" value="">
-        
+
+        <div id="login_contain">
+        <div style="margin-bottom: 15px">
         <button id="login_button" type="button" name="update" onclick="confirm_action('u')">Update Profile</button>
 
         <button id="login_button" type="button" name="logout" onclick="confirm_action('l')">Log Out</button>
 
-        <button id="login_button" type="button" name="delete" onclick="confirm_action('d')" style="background: red">Delete Account</button>
+        <button id="login_button" type="button" style="margin-right: 100px" onclick="window.location.href='browse.php';">Back</button>
 
-        <button id="login_button" type="button" onclick="window.location.href='browse.php';">Back</button>
+        </div>
+
+        <hr id="login_divider">
+
+        <button id="log_button" type="button" name="delete" onclick="confirm_action('d')" style="background: red">Delete Account</button>
+
+        </div>
 
         <script>
             function confirm_action(action) {
