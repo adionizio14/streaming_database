@@ -56,6 +56,7 @@ require 'includes/database-connection.php';		// Include the database connection 
         <input id="login_input" type="password" name="confirm_password" placeholder="Confirm Password"><br>
 
         <button id="login_button" type="submit">Sign Up</button>
+        <button id="login_button" type="button" onclick="window.location.href='login.php';">Back</button>
     </form>
 
     <?php
