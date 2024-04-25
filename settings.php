@@ -619,9 +619,9 @@ function get_fav_genre(PDO $pdo, int $id){
 
         <div id="login_contain">
         <div style="margin-bottom: 15px">
-        <button id="login_button" type="button" name="update" onclick="confirm_action('u')">Update Profile</button>
-
         <button id="login_button" type="button" name="logout" onclick="confirm_action('l')">Log Out</button>
+
+        <button id="login_button" type="button" name="update" onclick="confirm_action('u')">Update Profile</button>
 
         <button id="login_button" type="button" style="margin-right: 100px" onclick="window.location.href='browse.php';">Back</button>
 
