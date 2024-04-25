@@ -456,6 +456,7 @@ function get_fav_genre(PDO $pdo, int $id){
 
     <head>
         <title>Blockbuster++</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
     </head>
