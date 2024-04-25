@@ -622,7 +622,7 @@ function get_fav_genre(PDO $pdo, int $id){
 
         <button id="login_button" type="button" name="delete" onclick="confirm_action('d')" style="background: red">Delete Account</button>
 
-        <a href="browse.php">Back to Browse</a>
+        <button id="login_button" type="button" onclick="window.location.href='browse.php';">Back</button>
 
         <script>
             function confirm_action(action) {
