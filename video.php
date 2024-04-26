@@ -93,7 +93,7 @@ $trailerSRC = $trailer['trailerSRC'];
         });
     </script>
 
-        <iframe class="embed-responsive-item" src="<?php echo $trailerSRC ?>" frameborder="0" style="overflow: hidden; 
+        <iframe class="embed-responsive-item" src="<?php echo $trailerSRC ?>" frameborder="0" allowfullscreen style="overflow: hidden; 
             overflow-x: hidden; overflow-y: hidden; height: 75%; width: 75%; position: absolute; top: 100px; 
             left: 0px; right: 0px; bottom: 0px; margin: auto;">
         </iframe>
