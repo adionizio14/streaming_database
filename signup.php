@@ -11,6 +11,7 @@ require 'includes/database-connection.php';		// Include the database connection 
 <html>
 <head>
     <title>Blockbuster++</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -48,9 +49,33 @@ require 'includes/database-connection.php';		// Include the database connection 
         <br>
         <br>
 
+        <div class="inputbox">
         <label label id="login_label"> Create Password</label>
-        <input id="login_input" type="password" name="password" placeholder="Password"><br>
+        <input id="login_input" type="password" class="password" name="password" placeholder="Password"><br>
 
+<div class="pass_stren_box">
+
+    <div class="pass_stren">
+        <p class="text">Weak</p>
+        <div class="line_box">
+            <div class="line"></div>
+        </div>
+    </div>
+
+    <div class="tool_tip_box">
+        <span>?</span>
+        <div class="tool_tip">
+            <p style="list-style: none;"><b>Password must be:</b></p>
+            <p>Less than or equal to 16 characters</p>
+            <p>At least 8 characters long</p>
+            <p>At least 1 uppercase letter</p>
+            <p>At least 1 lowercase letter</p>
+            <p>At least 1 number</p>
+            <p>At least 1 speical character from !@#$%^&*</p>
+        </div>
+    </div>
+
+</div>
 
         <label label id="login_label">Confirm Password</label>
         <input id="login_input" type="password" name="confirm_password" placeholder="Confirm Password"><br>
@@ -75,8 +100,17 @@ require 'includes/database-connection.php';		// Include the database connection 
             
 
             // print_r($date_of_birth);
-            // Check if the password and confirm password match
-            if ($password != $confirm_password) {
+            // Check if password meets the requirements
+            if (strlen($password) < 8 
+            || strlen($password) > 16 
+            || !preg_match("#[0-9]+#", $password) 
+            || !preg_match("#[A-Z]+#", $password) 
+            || !preg_match("#[a-z]+#", $password) 
+            || !preg_match("#\W+#", $password)){
+                header("Location: signup.php?error=Password must be at least 8 characters long, contain at least one number, one special character, and one uppercase letter");
+                exit();
+            }
+            else if ($password != $confirm_password) {
                 header("Location: signup.php?error=Passwords do not match");
                 exit();
             }
@@ -126,5 +160,106 @@ require 'includes/database-connection.php';		// Include the database connection 
     
 </body>
 
+<script>
+
+    let line = document.querySelector(".line");
+    let text = document.querySelector(".text");
+    let pass_stren_box = document.querySelector(".pass_stren_box");
+    let password = document.querySelector(".password");
+
+    if(password.value.length == 0) {
+        pass_stren_box.style.display = "none";
+    }
+
+    password.oninput = function() {
+        if(password.value.length == 0) {
+            pass_stren_box.style.display = "none";
+        }
+
+        if(password.value.length >= 1) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "5%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+        }
+
+        if(password.value.length >= 2) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "10%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+        }
+
+        if(password.value.length >= 3) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "20%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+        }
+
+        if(password.value.length >= 4) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "35%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+
+            if ((password.value.match(/[!@#$%^&*]/))) {
+                pass_stren_box.style.display = "flex";
+                line.style.width = "45%";
+                line.style.backgroundColor = "#e9ee30";
+                text.style.color = "#e9ee30";
+                text.innerHTML = "Medium";
+            }
+        }
+
+        if(password.value.length >= 5 
+            && (password.value.match(/[A-Z]/)) 
+            && (password.value.match(/[a-z]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "50%";
+            line.style.backgroundColor = "#e9ee30";
+            text.style.color = "#e9ee30";
+            text.innerHTML = "Medium";
+        }
+
+        if(password.value.length >= 6 
+            && (password.value.match(/[0-9]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "70%";
+            line.style.backgroundColor = "#e9ee30";
+            text.style.color = "#e9ee30";
+            text.innerHTML = "Medium";
+        }
+
+        if(password.value.length >= 7 
+            && (password.value.match(/[A-Z]/)) 
+            && (password.value.match(/[a-z]/)) 
+            && (password.value.match(/[0-9]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "80%";
+            line.style.backgroundColor = "#e9ee30";
+            text.style.color = "#e9ee30";
+            text.innerHTML = "Medium";
+        }
+
+        if(password.value.length >= 8 
+            && (password.value.match(/[!@#$%^&*]/))
+            && (password.value.match(/[A-Z]/)) 
+            && (password.value.match(/[a-z]/)) 
+            && (password.value.match(/[0-9]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "100%";
+            line.style.backgroundColor = "#2ccc2c";
+            text.style.color = "#2ccc2c";
+            text.innerHTML = "Strong";
+        }
+
+    }
+
+</script>
 
 </html>

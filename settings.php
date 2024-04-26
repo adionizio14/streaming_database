@@ -230,6 +230,15 @@ function get_fav_genre(PDO $pdo, int $id){
                 header("Location: settings.php?error=All fields are required");
                 exit();
             }
+            if (strlen($password) < 8 
+            || strlen($password) > 16 
+            || !preg_match("#[0-9]+#", $password) 
+            || !preg_match("#[A-Z]+#", $password) 
+            || !preg_match("#[a-z]+#", $password) 
+            || !preg_match("#\W+#", $password)){
+                header("Location: signup.php?error=Password must be at least 8 characters long, contain at least one number, one special character, and one uppercase letter");
+                exit();
+            }
             // else check if password and confirm password have values
             else if(!empty($password) && !empty($confirm_password)){
                 // check if password and confirm password match
@@ -456,6 +465,7 @@ function get_fav_genre(PDO $pdo, int $id){
 
     <head>
         <title>Blockbuster++</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
 
     </head>
@@ -607,22 +617,54 @@ function get_fav_genre(PDO $pdo, int $id){
         <br>
         <br>
 
-        <label id="login_label"> New Password</label>
-        <input id="login_input" type="password" name="password" placeholder="Password"><br>
+        <div class="inputbox">
+        <label label id="login_label"> New Password</label>
+        <input id="login_input" type="password" class="password" name="password" placeholder="Password"><br>
 
+<div class="pass_stren_box">
+
+    <div class="pass_stren">
+        <p class="text">Weak</p>
+        <div class="line_box">
+            <div class="line"></div>
+        </div>
+    </div>
+
+    <div class="tool_tip_box">
+        <span>?</span>
+        <div class="tool_tip">
+            <p style="list-style: none;"><b>Password must be:</b></p>
+            <p>Less than or equal to 16 characters</p>
+            <p>At least 8 characters long</p>
+            <p>At least 1 uppercase letter</p>
+            <p>At least 1 lowercase letter</p>
+            <p>At least 1 number</p>
+            <p>At least 1 speical character from !@#$%^&*</p>
+        </div>
+    </div>
+
+</div>
 
         <label id="login_label">Confirm Password</label>
         <input id="login_input" type="password" name="confirm_password" placeholder="Confirm Password"><br>
         
         <input type="hidden" id="action" name="action" value="">
-        
-        <button id="login_button" type="button" name="update" onclick="confirm_action('u')">Update Profile</button>
 
+        <div id="login_contain">
+        <div style="margin-bottom: 15px">
         <button id="login_button" type="button" name="logout" onclick="confirm_action('l')">Log Out</button>
 
-        <button id="login_button" type="button" name="delete" onclick="confirm_action('d')" style="background: red">Delete Account</button>
+        <button id="login_button" type="button" name="update" onclick="confirm_action('u')">Update Profile</button>
 
-        <a href="browse.php">Back to Browse</a>
+        <button id="login_button" type="button" style="margin-right: 100px" onclick="window.location.href='browse.php';">Back</button>
+
+        </div>
+
+        <hr id="login_divider">
+
+        <button id="log_button" type="button" name="delete" onclick="confirm_action('d')" style="background: red">Delete Account</button>
+
+        </div>
 
         <script>
             function confirm_action(action) {
@@ -650,5 +692,107 @@ function get_fav_genre(PDO $pdo, int $id){
 
 
 </body>
+
+<script>
+
+    let line = document.querySelector(".line");
+    let text = document.querySelector(".text");
+    let pass_stren_box = document.querySelector(".pass_stren_box");
+    let password = document.querySelector(".password");
+
+    if(password.value.length == 0) {
+        pass_stren_box.style.display = "none";
+    }
+
+    password.oninput = function() {
+        if(password.value.length == 0) {
+            pass_stren_box.style.display = "none";
+        }
+
+        if(password.value.length >= 1) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "5%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+        }
+
+        if(password.value.length >= 2) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "10%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+        }
+
+        if(password.value.length >= 3) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "20%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+        }
+
+        if(password.value.length >= 4) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "35%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+
+            if ((password.value.match(/[!@#$%^&*]/))) {
+                pass_stren_box.style.display = "flex";
+                line.style.width = "45%";
+                line.style.backgroundColor = "#e9ee30";
+                text.style.color = "#e9ee30";
+                text.innerHTML = "Medium";
+            }
+        }
+
+        if(password.value.length >= 5 
+            && (password.value.match(/[A-Z]/)) 
+            && (password.value.match(/[a-z]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "50%";
+            line.style.backgroundColor = "#e9ee30";
+            text.style.color = "#e9ee30";
+            text.innerHTML = "Medium";
+        }
+
+        if(password.value.length >= 6 
+            && (password.value.match(/[0-9]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "70%";
+            line.style.backgroundColor = "#e9ee30";
+            text.style.color = "#e9ee30";
+            text.innerHTML = "Medium";
+        }
+
+        if(password.value.length >= 7 
+            && (password.value.match(/[A-Z]/)) 
+            && (password.value.match(/[a-z]/)) 
+            && (password.value.match(/[0-9]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "80%";
+            line.style.backgroundColor = "#e9ee30";
+            text.style.color = "#e9ee30";
+            text.innerHTML = "Medium";
+        }
+
+        if(password.value.length >= 8 
+            && (password.value.match(/[!@#$%^&*]/))
+            && (password.value.match(/[A-Z]/)) 
+            && (password.value.match(/[a-z]/)) 
+            && (password.value.match(/[0-9]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "100%";
+            line.style.backgroundColor = "#2ccc2c";
+            text.style.color = "#2ccc2c";
+            text.innerHTML = "Strong";
+        }
+
+    }
+
+</script>
 
 </html>

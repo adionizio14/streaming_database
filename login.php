@@ -59,6 +59,7 @@
 <head>
 
     <title>Blockbuster++</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
 </head>
@@ -75,16 +76,20 @@
             <p class="error"><?php echo $_GET['error']; ?> </p>
             <?php } ?>
 
-        <label id="login_label">Username</label>
-        <input id="login_input" type="text" name="uname" placeholder="Username"><br>
+        <label id="login_label">Email</label>
+        <input id="login_input" type="text" name="uname" placeholder="Email"><br>
 
         <label id="login_label">Password</label>
         <input id="login_input" type="password" name="password" placeholder="Password"><br>
 
-        <button id="login_button" type="submit">Login</button>
+        <div id="login_contain">
+        <button id="log_button" type="submit">Login</button>
 
-        <p>Don't have an account? <a href="signup.php">Sign Up</a></p>
-        
+        <hr id="login_divider">
+
+        <button id="log_button" type="button" onclick="window.location.href='signup.php';">New User</button>
+        </div>
+
     </form>
         </div>
     
