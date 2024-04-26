@@ -2,39 +2,23 @@
 session_start();
 require 'includes/database-connection.php'; 
 
-function get_mov_info(PDO $pdo, string $id) {
-
-    // SQL query to retrieve username and password from the database
-    $sql = "SELECT title, release_year, runtime, rating, imgSrc, movie_ID
-        FROM Movies
-        where movie_ID= :id;";		// Select the email and password from the customer table where the email is equal to the value of :id
-
-    // Execute the SQL query using the pdo function and fetch the result
-    $mov_info = pdo($pdo, $sql, ['id' => $id])->fetch();		// Associative array where 'id' is the key and $id is the value. Used to bind the value of $id to the placeholder :id in  SQL query.
-
-    // Return the toy mov_information (associative array)
-    return $mov_info;
-
+if(isset($_GET['movie_id'])) {
+    $id = $_GET['movie_id'];
+    $idType = 'movie_ID';
+    $table = 'Movies';
+} elseif(isset($_GET['show_id'])) {
+    $id = $_GET['show_id'];
+    $idType = 'show_ID';
+    $table = 'Shows';
+} else {
+    // Handle error, both movie_id and show_id are not set
+    exit("Error: No ID specified.");
 }
-    // SQL query to retrieve all toy IDs from the database
-    $sql = "SELECT movie_ID FROM Movies";
 
-    // Execute the SQL query using PDO and fetch all the toy IDs
-    $statement = $pdo->query($sql);
-    $movie_ids = $statement->fetchAll(PDO::FETCH_COLUMN);
+$sql = "SELECT trailerSRC FROM $table WHERE $idType = :id";
+$trailer = pdo($pdo, $sql, ['id' => $id])->fetch();
+$trailerSRC = $trailer['trailerSRC'];
 
-    // Create an empty array to store toy information
-    $movs = [];
-
-    // Iterate over each toy ID
-    foreach ($movie_ids as $id) {
-        // Retrieve info about the toy with the current ID from the db using provided PDO connection
-        $Movies = get_mov_info($pdo, $id);
-        // Add the retrieved toy information to the array
-        $movs[$id] = $Movies;
-    }
-
-// Now $toys array will contain information about all the toys
 ?>
 
 <!DOCTYPE html>
@@ -44,7 +28,7 @@ function get_mov_info(PDO $pdo, string $id) {
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
+<body style="background: #282828">
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="background-color: #0d3fa9">
             <a class="navbar-brand mr-1" href="browse.php">
                 <img src="image/Untitled design (6).PNG" width="150" height="150" alt="">
@@ -55,8 +39,8 @@ function get_mov_info(PDO $pdo, string $id) {
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-1">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="movies.php">Movies <span class="sr-only">(current)</span></a>
+                    <li class="nav-item">
+                        <a class="nav-link" href="movies.php">Movies</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="shows.php">Shows</a>
@@ -100,31 +84,6 @@ function get_mov_info(PDO $pdo, string $id) {
             </div>
         </nav>
 
-        <main>
-            <?php foreach ($movs as $movs_inf): ?>
-            <div class="card">
-                <div class="image">
-                <?php if (is_array($movs_inf)): ?>
-                    <a href="video.php?movie_id=<?=$movs_inf['movie_ID'] ?>"><img src=<?php echo $movs_inf['imgSrc']; ?>></a>
-                <?php else: ?>
-                    <p>Movie image not available</p>
-                <?php endif; ?>
-                </div>
-                <div class="caption">
-                <?php if (is_array($movs_inf)): ?>
-                    <p class="title">Title: <?php echo $movs_inf['title']; ?></p>
-                    <p class="release_year">Release Year: <?php echo $movs_inf['release_year']; ?></p>
-                    <p class="runtime">Runtime: <?php echo $movs_inf['runtime']; ?></p>
-                    <p class="rating">Rating: <?php echo $movs_inf['rating']; ?></p>
-                <?php else: ?>
-                    <p class="error">Movie information not available</p>
-                <?php endif; ?>
-                </div>
-            </div>
-            <?php endforeach; ?>
-            </main>
-
-
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -133,4 +92,10 @@ function get_mov_info(PDO $pdo, string $id) {
             $('.dropdown-toggle').dropdown();
         });
     </script>
+
+        <iframe class="embed-responsive-item" src="<?php echo $trailerSRC ?>" frameborder="0" allowfullscreen style="overflow: hidden; 
+            overflow-x: hidden; overflow-y: hidden; height: 75%; width: 75%; position: absolute; top: 100px; 
+            left: 0px; right: 0px; bottom: 0px; margin: auto;">
+        </iframe>
+
 </body>

@@ -7,7 +7,7 @@ $genre_id = $_GET['genrenum'];
 function get_mov_info(PDO $pdo, string $id, string $genre_id) {
 
     // SQL query to retrieve username and password from the database
-    $sql = "SELECT title, release_year, runtime, rating, imgSrc
+    $sql = "SELECT title, release_year, runtime, rating, imgSrc, Movies.movie_ID
         FROM Movies JOIN Movie_genres
         where Movies.movie_ID= :id
         AND Movie_genres.genre_ID= :genreid
@@ -43,7 +43,7 @@ function get_mov_info(PDO $pdo, string $id, string $genre_id) {
 function get_show_info(PDO $pdo, string $id, string $genre_id) {
 
     // SQL query to retrieve username and password from the database
-    $sql = "SELECT title, release_year, rating, imgSrc
+    $sql = "SELECT title, release_year, rating, imgSrc, Shows.show_ID
         FROM Shows JOIN Show_genres
         where Shows.show_ID= :id
         AND Show_genres.genre_ID= :genreid
@@ -144,7 +144,7 @@ function get_show_info(PDO $pdo, string $id, string $genre_id) {
             <div class="card">
                 <div class="image">
                 <?php if (is_array($movs_inf)): ?>
-                    <img src=<?php echo $movs_inf['imgSrc']; ?>>
+                    <a href="video.php?movie_id=<?=$movs_inf['movie_ID'] ?>"><img src=<?php echo $movs_inf['imgSrc']; ?>></a>
                 <?php else: ?>
                     <p>Movie image not available</p>
                 <?php endif; ?>
@@ -166,7 +166,7 @@ function get_show_info(PDO $pdo, string $id, string $genre_id) {
             <div class="card">
                 <div class="image">
                 <?php if (is_array($shos_inf)): ?>
-                    <img src=<?php echo $shos_inf['imgSrc']; ?>>
+                    <a href="video.php?show_id=<?=$shos_inf['show_ID'] ?>"><img src=<?php echo $shos_inf['imgSrc']; ?>></a>
                 <?php else: ?>
                     <p>Movie image not available</p>
                 <?php endif; ?>
