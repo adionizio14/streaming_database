@@ -4,7 +4,7 @@ require 'includes/database-connection.php';
 function get_show_info(PDO $pdo, string $id) {
 
     // SQL query to retrieve username and password from the database
-    $sql = "SELECT title, release_year, rating, imgSrc
+    $sql = "SELECT title, release_year, rating, imgSrc, show_ID
         FROM Shows
         where show_ID= :id;";		// Select the email and password from the customer table where the email is equal to the value of :id
 
@@ -104,7 +104,7 @@ function get_show_info(PDO $pdo, string $id) {
             <div class="card">
                 <div class="image">
                 <?php if (is_array($shos_inf)): ?>
-                    <img src=<?php echo $shos_inf['imgSrc']; ?>>
+                    <a href="video.php?show_id=<?=$shos_inf['show_ID'] ?>"><img src=<?php echo $shos_inf['imgSrc']; ?>></a>
                 <?php else: ?>
                     <p>Movie image not available</p>
                 <?php endif; ?>

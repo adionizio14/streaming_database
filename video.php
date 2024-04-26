@@ -2,12 +2,22 @@
 session_start();
 require 'includes/database-connection.php'; 
 
-$movie_id = $_GET['movie_id'];
-$sql = "SELECT trailerSRC FROM Movies WHERE movie_ID = :movie_id";
+if(isset($_GET['movie_id'])) {
+    $id = $_GET['movie_id'];
+    $idType = 'movie_ID';
+    $table = 'Movies';
+} elseif(isset($_GET['show_id'])) {
+    $id = $_GET['show_id'];
+    $idType = 'show_ID';
+    $table = 'Shows';
+} else {
+    // Handle error, both movie_id and show_id are not set
+    exit("Error: No ID specified.");
+}
 
-$trailer= pdo($pdo, $sql, ['movie_id' => $movie_id])->fetch();
+$sql = "SELECT trailerSRC FROM $table WHERE $idType = :id";
+$trailer = pdo($pdo, $sql, ['id' => $id])->fetch();
 $trailerSRC = $trailer['trailerSRC'];
-print($trailerSRC);
 
 ?>
 
