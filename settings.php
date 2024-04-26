@@ -612,8 +612,40 @@ function get_fav_genre(PDO $pdo, int $id){
         <br>
         <br>
 
-        <label id="login_label"> New Password</label>
-        <input id="login_input" type="password" name="password" placeholder="Password"><br>
+<!-- div insert -->
+        <div class="inputbox">
+<!-- div insert end -->
+
+        <label label id="login_label"> New Password</label>
+        <input id="login_input" type="text" class="password" name="password" placeholder="Password"><br>
+
+<!-- password demo -->
+
+<div class="pass_stren_box">
+
+    <div class="pass_stren">
+        <p class="text">Weak</p>
+        <div class="line_box">
+            <div class="line"></div>
+        </div>
+    </div>
+
+    <div class="tool_tip_box">
+        <span>?</span>
+        <div class="tool_tip">
+            <p style="list-style: none;"><b>Password must be:</b></p>
+            <p>Less than or equal to 16 characters</p>
+            <p>At least 8 characters long</p>
+            <p>At least 1 uppercase letter</p>
+            <p>At least 1 lowercase letter</p>
+            <p>At least 1 number</p>
+            <p>At least 1 speical character from !@#$%^&*</p>
+        </div>
+    </div>
+
+</div>
+
+<!-- password demo -->
 
 
         <label id="login_label">Confirm Password</label>
@@ -663,5 +695,107 @@ function get_fav_genre(PDO $pdo, int $id){
 
 
 </body>
+
+<script>
+
+    let line = document.querySelector(".line");
+    let text = document.querySelector(".text");
+    let pass_stren_box = document.querySelector(".pass_stren_box");
+    let password = document.querySelector(".password");
+
+    if(password.value.length == 0) {
+        pass_stren_box.style.display = "none";
+    }
+
+    password.oninput = function() {
+        if(password.value.length == 0) {
+            pass_stren_box.style.display = "none";
+        }
+
+        if(password.value.length >= 1) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "5%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+        }
+
+        if(password.value.length >= 2) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "10%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+        }
+
+        if(password.value.length >= 3) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "20%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+        }
+
+        if(password.value.length >= 4) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "35%";
+            line.style.backgroundColor = "red";
+            text.style.color = "red";
+            text.innerHTML = "Weak";
+
+            if ((password.value.match(/[!@#$%^&*]/))) {
+                pass_stren_box.style.display = "flex";
+                line.style.width = "45%";
+                line.style.backgroundColor = "#e9ee30";
+                text.style.color = "#e9ee30";
+                text.innerHTML = "Medium";
+            }
+        }
+
+        if(password.value.length >= 5 
+            && (password.value.match(/[A-Z]/)) 
+            && (password.value.match(/[a-z]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "50%";
+            line.style.backgroundColor = "#e9ee30";
+            text.style.color = "#e9ee30";
+            text.innerHTML = "Medium";
+        }
+
+        if(password.value.length >= 6 
+            && (password.value.match(/[0-9]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "70%";
+            line.style.backgroundColor = "#e9ee30";
+            text.style.color = "#e9ee30";
+            text.innerHTML = "Medium";
+        }
+
+        if(password.value.length >= 7 
+            && (password.value.match(/[A-Z]/)) 
+            && (password.value.match(/[a-z]/)) 
+            && (password.value.match(/[0-9]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "80%";
+            line.style.backgroundColor = "#e9ee30";
+            text.style.color = "#e9ee30";
+            text.innerHTML = "Medium";
+        }
+
+        if(password.value.length >= 8 
+            && (password.value.match(/[!@#$%^&*]/))
+            && (password.value.match(/[A-Z]/)) 
+            && (password.value.match(/[a-z]/)) 
+            && (password.value.match(/[0-9]/))) {
+            pass_stren_box.style.display = "flex";
+            line.style.width = "100%";
+            line.style.backgroundColor = "#2ccc2c";
+            text.style.color = "#2ccc2c";
+            text.innerHTML = "Strong";
+        }
+
+    }
+
+</script>
 
 </html>
