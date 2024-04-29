@@ -41,13 +41,13 @@
 
                 //print($url);
                 
-                header("Location: browse.php");
+                header("Location: admin.php");
                 exit();
             }
 
             else {
                 // Display an error message
-                header("Location: login.php?error=Invalid Username or Password");
+                header("Location: admin_login.php?error=Invalid Username or Password");
                 exit();
             }
         }
@@ -58,7 +58,7 @@
 <html>
 <head>
 
-    <title>Blockbuster++</title>
+    <title>Admin</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
 
@@ -66,15 +66,12 @@
 
 <body id="login_body">
 
-<div class="container">
-<img src="image/Untitled design (6).PNG" alt="">
-
-    <form id="login_form" method="POST">
-        <h2 id="login_h2">Login</h2>
+    <form id="settings_form" method="POST">
+        <h2 id="login_h2">Admin</h2>
 
         <?php if (isset($_GET['error'])) { ?>
             <p class="error"><?php echo $_GET['error']; ?> </p>
-            <?php } ?>
+        <?php } ?>
 
         <label id="login_label">Email</label>
         <input id="login_input" type="text" name="uname" placeholder="Email"><br>
@@ -83,17 +80,10 @@
         <input id="login_input" type="password" name="password" placeholder="Password"><br>
 
         <div id="login_contain">
-        <button id="log_button" type="submit">Login</button>
-
-        <hr id="login_divider">
-
-        <button id="log_button" type="button" onclick="window.location.href='signup.php';">New User</button>
+            <button id="log_button" type="submit">Login</button>
         </div>
-
-        <p>Admin? <a href="admin_login.php">Log in</a></p>
 
     </form>
-        </div>
     
 </body>
 
