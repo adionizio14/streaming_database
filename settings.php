@@ -230,18 +230,19 @@ function get_fav_genre(PDO $pdo, int $id){
                 header("Location: settings.php?error=All fields are required");
                 exit();
             }
-            if (strlen($password) < 8 
-            || strlen($password) > 16 
-            || !preg_match("#[0-9]+#", $password) 
-            || !preg_match("#[A-Z]+#", $password) 
-            || !preg_match("#[a-z]+#", $password) 
-            || !preg_match("#\W+#", $password)){
-                header("Location: signup.php?error=Password must be at least 8 characters long, contain at least one number, one special character, and one uppercase letter");
-                exit();
             }
             // else check if password and confirm password have values
             else if(!empty($password) && !empty($confirm_password)){
                 // check if password and confirm password match
+                if (strlen($password) < 8 
+                || strlen($password) > 16 
+                || !preg_match("#[0-9]+#", $password) 
+                || !preg_match("#[A-Z]+#", $password) 
+                || !preg_match("#[a-z]+#", $password) 
+                || !preg_match("#\W+#", $password)){
+                    header("Location: signup.php?error=Password must be at least 8 characters long, contain at least one number, one special character, and one uppercase letter");
+                    exit();
+                }
                 if ($password != $confirm_password) {
                     header("Location: settings.php?error=Passwords do not match");
                     exit();
